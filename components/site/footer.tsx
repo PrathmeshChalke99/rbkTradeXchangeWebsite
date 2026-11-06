@@ -1,89 +1,63 @@
-'use client';
-
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, Phone, ShieldCheck, Sparkles } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
+import { Logo } from '@/components/site/navbar';
 
 export function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-brand-paper to-white border-t border-brand-paleblue/60 overflow-hidden">
-      <div className="absolute top-0 left-0 h-2 w-full bg-gradient-to-r from-brand-blue via-brand-violet to-brand-turquoise" />
-
-      {/* Floating brand mark */}
-      <motion.div
-        className="absolute top-10 right-10 h-20 w-20 rounded-full bg-brand-paleblue/20 blur-2xl pointer-events-none"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid gap-8 lg:grid-cols-5">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue to-brand-violet shadow-glow-blue">
-                <span className="font-heading text-sm font-bold text-white">RB</span>
-              </div>
-              <span className="font-heading text-lg font-bold tracking-tight text-brand-ink">
-                RBK <span className="gradient-text-blue">TradeXchange</span>
-              </span>
+    <footer className="surface-dark on-dark noise">
+      <div className="grid-lines absolute inset-0 opacity-60" aria-hidden />
+      <div className="relative mx-auto max-w-7xl px-4 pb-8 pt-14 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+          <div className="max-w-sm">
+            <Link href="/" aria-label="RBK TradeXchange home" className="inline-block rounded-lg">
+              <Logo light className="h-12 sm:h-12" />
             </Link>
-            <p className="text-sm text-brand-slate max-w-xs leading-relaxed">
-              {siteConfig.description}
-            </p>
-            <div className="mt-4 space-y-2">
-              <div className="flex items-center gap-2 text-xs text-brand-slate">
-                <Mail className="h-3.5 w-3.5 text-brand-blue" />
-                hello@rbktradexchange.com
-              </div>
-              <div className="flex items-center gap-2 text-xs text-brand-slate">
-                <Phone className="h-3.5 w-3.5 text-brand-blue" />
-                +91 22 1234 5678
-              </div>
-              <div className="flex items-center gap-2 text-xs text-brand-slate">
-                <MapPin className="h-3.5 w-3.5 text-brand-blue" />
-                Mumbai, India
-              </div>
-            </div>
+            <p className="mt-5 text-sm leading-relaxed text-white/60">{siteConfig.description}</p>
+            <ul className="mt-6 space-y-2.5 text-sm">
+              <li>
+                <a href="mailto:hello@rbktradexchange.com" className="inline-flex items-center gap-2.5 text-white/70 transition hover:text-white">
+                  <Mail className="h-4 w-4 text-[#8cc8f0]" aria-hidden />hello@rbktradexchange.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+912212345678" className="inline-flex items-center gap-2.5 text-white/70 transition hover:text-white">
+                  <Phone className="h-4 w-4 text-[#8cc8f0]" aria-hidden />+91 22 1234 5678
+                </a>
+              </li>
+              <li className="inline-flex items-center gap-2.5 text-white/70">
+                <MapPin className="h-4 w-4 text-[#8cc8f0]" aria-hidden />Mumbai, India
+              </li>
+            </ul>
           </div>
 
-          {/* Footer nav */}
-          {Object.entries(siteConfig.footerNav).map(([section, links]) => (
-            <div key={section}>
-              <h4 className="font-heading text-sm font-semibold text-brand-ink mb-3">{section}</h4>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-slate hover:text-brand-blue transition-colors flex items-center gap-1 group"
-                    >
-                      <ArrowRight className="h-3 w-3 opacity-0 -ml-4 group-hover:ml-0 group-hover:opacity-100 transition-all" />
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-4">
+            {Object.entries(siteConfig.footerNav).map(([section, links]) => (
+              <nav key={section} aria-label={section}>
+                <h4 className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-white/45">{section}</h4>
+                <ul className="mt-4 space-y-2.5">
+                  {links.map((link) => (
+                    <li key={link.label}>
+                      <Link href={link.href} className="group relative inline-block text-sm text-white/70 transition hover:text-white">
+                        {link.label}
+                        <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-white/50 transition-transform duration-300 group-hover:scale-x-100" aria-hidden />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-brand-paleblue/40 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-brand-slate">
-            © {new Date().getFullYear()} RBK TradeXchange. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4 text-xs text-brand-slate">
-            <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-brand-blue animate-pulse-soft" />
-              Technology platform — not a lender
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-brand-violet animate-pulse-soft" />
-              Responsible AI
-            </span>
-          </div>
+        <div className="mt-12 grid gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-xs leading-relaxed text-white/55 sm:grid-cols-2 sm:p-5">
+          <p className="flex gap-2.5"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#8cc8f0]" aria-hidden />RBK TradeXchange is a technology platform, not a bank, NBFC or lender. Eligibility, pricing and terms are decided independently by participating lenders.</p>
+          <p className="flex gap-2.5"><Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[#8cc8f0]" aria-hidden />AI features assist with document checks and fit estimates. They do not replace professional review or a lender&apos;s decision.</p>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row">
+          <p>© {new Date().getFullYear()} RBK TradeXchange. All rights reserved.</p>
+          <p className="font-mono uppercase tracking-[0.14em]">Import · Export · Trade finance</p>
         </div>
       </div>
     </footer>

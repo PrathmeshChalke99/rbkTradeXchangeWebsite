@@ -1,46 +1,44 @@
 import './globals.css';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/sora';
+import '@fontsource-variable/jetbrains-mono';
 import type { Metadata } from 'next';
-import { Inter, Poppins, JetBrains_Mono } from 'next/font/google';
+import { Providers } from '@/components/pages/providers';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'], variable: '--font-geist', display: 'swap' });
-const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', display: 'swap' });
+const title = 'RBK TradeXchange — Trade Finance Technology for Importers & Exporters';
+const description =
+  'RBK TradeXchange connects importers and exporters with participating lenders. Manage trade documents, check them with AI, apply for trade and business finance, compare lender quotations and generate e-documents in one workspace.';
 
 export const metadata: Metadata = {
-  title: 'RBK TradeXchange — AI-Powered Trade Finance Technology Platform',
-  description:
-    'RBK TradeXchange is an Indian import-export trade-finance technology platform. Manage trade documents, business finance workflows, lender quotations, AI document analysis, and e-documents — all in one place.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title,
+  description,
   keywords: [
     'RBK TradeXchange',
     'trade finance',
     'import export',
-    'document analysis',
     'letter of credit',
-    'business finance',
-    'India trade',
+    'LC discounting',
+    'invoice financing',
+    'packing credit',
+    'trade documents',
+    'bill of lading',
+    'India trade finance',
   ],
-  openGraph: {
-    title: 'RBK TradeXchange — AI-Powered Trade Finance Technology Platform',
-    description:
-      'Manage trade documents, business finance workflows, lender quotations, AI document analysis, and e-documents — all in one place.',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'RBK TradeXchange — AI-Powered Trade Finance Technology Platform',
-    description:
-      'Manage trade documents, business finance workflows, lender quotations, AI document analysis, and e-documents.',
-  },
+  openGraph: { title, description, type: 'website', siteName: 'RBK TradeXchange' },
+  twitter: { card: 'summary_large_image', title, description },
+  themeColor: '#050f24',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} ${jetbrains.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en">
+      <body className="font-sans antialiased">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-blue focus:shadow-lift">
+          Skip to content
+        </a>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

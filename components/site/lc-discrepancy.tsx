@@ -26,15 +26,14 @@ export function LCDiscrepancy() {
   const [activeField, setActiveField] = useState<number | null>(null);
 
   const statusConfig = {
-    match: { icon: CheckCircle2, color: '#10b981', bg: '#d1fae5', label: 'Matched' },
-    warning: { icon: AlertTriangle, color: '#f59e0b', bg: '#fef3c7', label: 'Warning' },
-    discrepancy: { icon: XCircle, color: '#ef4444', bg: '#fce7f3', label: 'Discrepancy' },
+    match: { icon: CheckCircle2, color: '#10b981', bg: '#ddf4ee', label: 'Matched' },
+    warning: { icon: AlertTriangle, color: '#b7700b', bg: '#fdf3da', label: 'Warning' },
+    discrepancy: { icon: XCircle, color: '#ef4444', bg: '#e3f1fb', label: 'Discrepancy' },
     unchecked: { icon: FileText, color: '#94a3b8', bg: '#f1f5f9', label: 'Unchecked' },
   };
 
   return (
-    <section id="lc-discrepancy" className="relative py-20 sm:py-28 bg-white overflow-hidden">
-      <div className="absolute top-1/3 right-0 h-72 w-72 rounded-full bg-brand-pink/30 blur-3xl pointer-events-none" />
+    <section id="lc-discrepancy" className="relative py-14 sm:py-20 bg-white overflow-hidden">
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -43,7 +42,7 @@ export function LCDiscrepancy() {
           description="Upload the LC draft and supporting documents. AI extracts fields, compares across documents, and produces a structured report with clear severity labels."
         />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {/* Document layers visualization */}
           <div className="relative">
             <div className="rounded-2xl border border-brand-paleblue bg-gradient-to-br from-brand-lavender/10 via-white to-brand-pink/10 p-6 min-h-[360px]">

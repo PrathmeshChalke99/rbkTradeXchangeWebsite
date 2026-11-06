@@ -17,11 +17,11 @@ import {
 import { cn } from '@/lib/utils';
 
 const modules = [
-  { id: 'trade', label: 'Trade Management', icon: FileSearch, color: '#2563eb', bg: '#dbeafe' },
-  { id: 'finance', label: 'Business Finance', icon: Landmark, color: '#8b5cf6', bg: '#ede9fe' },
-  { id: 'network', label: 'Network Mgmt', icon: Share2, color: '#5eead4', bg: '#d1fae5' },
-  { id: 'quotations', label: 'Trade Finance', icon: Handshake, color: '#f59e0b', bg: '#fef3c7' },
-  { id: 'edocs', label: 'E-Docs', icon: FilePlus, color: '#ec4899', bg: '#fce7f3' },
+  { id: 'trade', label: 'Trade Management', icon: FileSearch, color: '#1d5fd6', bg: '#e2ecfa' },
+  { id: 'finance', label: 'Business Finance', icon: Landmark, color: '#4c5fd5', bg: '#eceffb' },
+  { id: 'network', label: 'Network Mgmt', icon: Share2, color: '#0f9a8a', bg: '#ddf4ee' },
+  { id: 'quotations', label: 'Trade Finance', icon: Handshake, color: '#b7700b', bg: '#fdf3da' },
+  { id: 'edocs', label: 'E-Docs', icon: FilePlus, color: '#0b78bf', bg: '#e3f1fb' },
 ];
 
 // ── Trade Management Demo ──────────────────────────────────────────
@@ -338,10 +338,10 @@ function BusinessFinanceDemo() {
 function NetworkDemo() {
   const [hovered, setHovered] = useState<string | null>(null);
   const nodeColors: Record<string, string> = {
-    company: '#2563eb', buyer: '#8b5cf6', supplier: '#5eead4', logistics: '#f59e0b',
+    company: '#1d5fd6', buyer: '#4c5fd5', supplier: '#0f9a8a', logistics: '#b7700b',
   };
   const nodeBgs: Record<string, string> = {
-    company: '#dbeafe', buyer: '#ede9fe', supplier: '#d1fae5', logistics: '#fef3c7',
+    company: '#e2ecfa', buyer: '#eceffb', supplier: '#ddf4ee', logistics: '#fdf3da',
   };
 
   return (
@@ -413,10 +413,10 @@ function NetworkDemo() {
           <h4 className="font-heading text-sm font-semibold text-brand-ink mb-3">Network Legend</h4>
           <div className="space-y-2">
             {[
-              { label: 'Your Company', color: '#2563eb', bg: '#dbeafe' },
-              { label: 'Buyers', color: '#8b5cf6', bg: '#ede9fe' },
-              { label: 'Suppliers', color: '#5eead4', bg: '#d1fae5' },
-              { label: 'Logistics Partners', color: '#f59e0b', bg: '#fef3c7' },
+              { label: 'Your Company', color: '#1d5fd6', bg: '#e2ecfa' },
+              { label: 'Buyers', color: '#4c5fd5', bg: '#eceffb' },
+              { label: 'Suppliers', color: '#0f9a8a', bg: '#ddf4ee' },
+              { label: 'Logistics Partners', color: '#b7700b', bg: '#fdf3da' },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-2.5">
                 <div className="h-4 w-4 rounded-full border-2" style={{ background: item.bg, borderColor: item.color }} />
@@ -705,9 +705,7 @@ export function ProductWorkbench() {
   }, [activeTab, paused, autoAdvance]);
 
   return (
-    <section id="workbench" className="relative py-20 sm:py-28 bg-white overflow-hidden">
-      <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-brand-paleblue/30 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-20 right-10 h-80 w-80 rounded-full bg-brand-mint/25 blur-3xl pointer-events-none" />
+    <section id="workbench" className="relative py-14 sm:py-20 bg-white overflow-hidden">
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -717,7 +715,7 @@ export function ProductWorkbench() {
         />
 
         <div
-          className="mt-12"
+          className="mt-10"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocus={() => setPaused(true)}
@@ -725,14 +723,14 @@ export function ProductWorkbench() {
         >
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-              <TabsList className="flex w-full sm:w-auto flex-wrap sm:flex-nowrap h-auto bg-white/60 border border-brand-paleblue p-1.5">
+              <TabsList className="flex h-auto w-full flex-wrap gap-1 rounded-xl border border-brand-line bg-white p-1.5 shadow-soft sm:w-auto sm:flex-nowrap">
                 {modules.map((m) => {
                   const Icon = m.icon;
                   return (
                     <TabsTrigger
                       key={m.id}
                       value={m.id}
-                      className="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm data-[state=active]:shadow-soft whitespace-nowrap"
+                      className="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-xs font-medium text-brand-slate transition-colors data-[state=active]:shadow-soft sm:text-sm"
                       style={activeTab === m.id ? { background: m.bg, color: m.color } : {}}
                     >
                       <Icon className="h-4 w-4" />
@@ -747,7 +745,7 @@ export function ProductWorkbench() {
                   size="sm"
                   variant="outline"
                   onClick={() => setPaused(!paused)}
-                  className="gap-1.5 border-brand-paleblue"
+                  className="gap-1.5 rounded-lg border-brand-line"
                 >
                   {paused ? <Play className="h-3.5 w-3.5" /> : <Pause className="h-3.5 w-3.5" />}
                   {paused ? 'Resume' : 'Pause'}
@@ -755,6 +753,13 @@ export function ProductWorkbench() {
               </div>
             </div>
 
+            <div className="overflow-hidden rounded-3xl border border-brand-line bg-brand-paper shadow-lift">
+            <div className="flex items-center gap-2 border-b border-brand-line bg-white px-4 py-2.5">
+              <span className="flex gap-1.5" aria-hidden><i className="h-2.5 w-2.5 rounded-full bg-[#e6ebf3]" /><i className="h-2.5 w-2.5 rounded-full bg-[#e6ebf3]" /><i className="h-2.5 w-2.5 rounded-full bg-[#e6ebf3]" /></span>
+              <span className="ml-2 truncate font-mono text-[11px] text-brand-slate">portal.rbktradexchange · {modules.find((m) => m.id === activeTab)?.label}</span>
+              <span className="ml-auto rounded-full bg-brand-paper px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-brand-slate ring-1 ring-brand-line">Interactive demo</span>
+            </div>
+            <div className="p-4 sm:p-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -770,6 +775,8 @@ export function ProductWorkbench() {
                 <TabsContent value="edocs" className="mt-0"><EDocsDemo /></TabsContent>
               </motion.div>
             </AnimatePresence>
+            </div>
+            </div>
           </Tabs>
         </div>
       </div>

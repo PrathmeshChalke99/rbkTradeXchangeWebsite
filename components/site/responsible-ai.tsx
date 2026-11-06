@@ -10,51 +10,49 @@ const principles = [
     icon: Brain,
     title: 'AI Assists, Never Decides',
     description: 'AI helps with document analysis and assessment, but it never makes the final call. Lenders make their own decisions. Professionals review documents.',
-    color: '#2563eb',
-    bg: '#dbeafe',
+    color: '#1d5fd6',
+    bg: '#e2ecfa',
   },
   {
     icon: Eye,
     title: 'Transparent & Labeled',
     description: 'Every AI feature is clearly labeled. Sample data is identified as such. Simulated results are never presented as real backend operations.',
-    color: '#8b5cf6',
-    bg: '#ede9fe',
+    color: '#4c5fd5',
+    bg: '#eceffb',
   },
   {
     icon: FileCheck,
     title: 'No Guaranteed Accuracy',
     description: 'AI-assisted document analysis does not guarantee perfect accuracy. All results should be reviewed by a human before final decisions.',
-    color: '#5eead4',
-    bg: '#d1fae5',
+    color: '#0f9a8a',
+    bg: '#ddf4ee',
   },
   {
     icon: Lock,
     title: 'Data Handling',
     description: 'Your documents and financial information are handled with care. Access is controlled and data is used only for the stated purpose.',
-    color: '#f59e0b',
-    bg: '#fef3c7',
+    color: '#b7700b',
+    bg: '#fdf3da',
   },
   {
     icon: Scale,
     title: 'Honest Business Claims',
     description: 'RBK TradeXchange is a technology platform — not a bank, NBFC, or lender. We do not claim certifications or regulatory authorizations we do not hold.',
-    color: '#ec4899',
-    bg: '#fce7f3',
+    color: '#0b78bf',
+    bg: '#e3f1fb',
   },
   {
     icon: ShieldCheck,
     title: 'Professional Review Required',
     description: 'AI does not replace required professional review of LC documents or financial assessments. Qualified professionals must always be involved.',
-    color: '#14b8a6',
-    bg: '#ccfbf1',
+    color: '#0f9a8a',
+    bg: '#ddf4ee',
   },
 ];
 
 export function ResponsibleAI() {
   return (
-    <section id="responsible-ai" className="relative py-20 sm:py-28 mesh-bg overflow-hidden">
-      <div className="absolute top-0 left-0 h-72 w-72 rounded-full bg-brand-mint/30 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-brand-lavender/30 blur-3xl pointer-events-none" />
+    <section id="responsible-ai" className="relative py-14 sm:py-20 bg-white overflow-hidden">
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -68,7 +66,7 @@ export function ResponsibleAI() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {principles.map((p) => {
             const Icon = p.icon;

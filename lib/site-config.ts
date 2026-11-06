@@ -6,26 +6,33 @@ export const siteConfig = {
     'An Indian import-export trade-finance technology platform that helps importers and exporters manage trade documents, business-finance workflows, lender quotations, and e-documents.',
   url: '',
   nav: [
-    { label: 'Platform', href: '#platform' },
-    { label: 'Workbench', href: '#workbench' },
-    { label: 'AI Intelligence', href: '#ai-intelligence' },
-    { label: 'Finance', href: '#finance' },
-    { label: 'Pricing', href: '#pricing' },
-    { label: 'FAQ', href: '#faq' },
-  ],
+    { label: 'Finance', href: '/finance', menu: 'finance' },
+    { label: 'Platform', href: '/platform', menu: 'platform' },
+    { label: 'How It Works', href: '/how-it-works' },
+    { label: 'E-Docs', href: '/documents' },
+    { label: 'Resources', href: '/resources' },
+    { label: 'Pricing', href: '/pricing' },
+  ] as { label: string; href: string; menu?: 'finance' | 'platform' }[],
   footerNav: {
-    Product: [
-      { label: 'Platform Capabilities', href: '#platform' },
-      { label: 'AI Document Intelligence', href: '#ai-intelligence' },
-      { label: 'Business Finance', href: '#finance' },
-      { label: 'E-Docs', href: '#e-docs' },
-      { label: 'Pricing', href: '#pricing' },
+    Finance: [
+      { label: 'All Finance Products', href: '/finance' },
+      { label: 'International Trade Finance', href: '/finance/international-trade-finance' },
+      { label: 'Domestic Supply Chain', href: '/finance/domestic-supply-chain-finance' },
+      { label: 'Business / Corporate Finance', href: '/finance/corporate-finance' },
+      { label: 'LC Solutions', href: '/finance/international-trade-finance/lc-solutions' },
+    ],
+    Platform: [
+      { label: 'Platform Overview', href: '/platform' },
+      { label: 'AI Document Analysis', href: '/platform/ai-document-analysis' },
+      { label: 'Lender Quotations', href: '/platform/lender-quotations' },
+      { label: 'E-Docs Studio', href: '/documents' },
+      { label: 'Responsible AI', href: '/platform/responsible-ai' },
     ],
     Company: [
-      { label: 'How It Works', href: '#how-it-works' },
-      { label: 'Features', href: '#features' },
-      { label: 'Responsible AI', href: '#responsible-ai' },
-      { label: 'FAQ', href: '#faq' },
+      { label: 'How It Works', href: '/how-it-works' },
+      { label: 'Resources', href: '/resources' },
+      { label: 'Pricing', href: '/pricing' },
+      { label: 'FAQ', href: '/faq' },
       { label: 'Contact', href: '/contact' },
     ],
     Account: [
@@ -42,8 +49,8 @@ export const tradeWorkflowSteps = [
     description:
       'Register your company and choose a subscription plan to access the Trade Management portal with entitlements tailored to your needs.',
     icon: 'UserPlus',
-    color: '#2563eb',
-    bg: '#dbeafe',
+    color: '#1d5fd6',
+    bg: '#e2ecfa',
   },
   {
     id: '02',
@@ -51,8 +58,8 @@ export const tradeWorkflowSteps = [
     description:
       'Select import or export, upload trade documents, and let AI-assisted analysis extract fields, cross-check data, and flag discrepancies.',
     icon: 'FileSearch',
-    color: '#8b5cf6',
-    bg: '#ede9fe',
+    color: '#4c5fd5',
+    bg: '#eceffb',
   },
   {
     id: '03',
@@ -60,8 +67,8 @@ export const tradeWorkflowSteps = [
     description:
       'Choose a finance category and subcategory, upload KYC and financial documents, and submit your application for lender review.',
     icon: 'Landmark',
-    color: '#5eead4',
-    bg: '#d1fae5',
+    color: '#0f9a8a',
+    bg: '#ddf4ee',
   },
   {
     id: '04',
@@ -69,8 +76,8 @@ export const tradeWorkflowSteps = [
     description:
       'Participating lenders independently review your application and provide quotations based on their own criteria and assessment.',
     icon: 'Handshake',
-    color: '#f59e0b',
-    bg: '#fef3c7',
+    color: '#b7700b',
+    bg: '#fdf3da',
   },
   {
     id: '05',
@@ -78,8 +85,8 @@ export const tradeWorkflowSteps = [
     description:
       'Create proforma invoices, contracts, and packing lists from templates using your company information and partner details.',
     icon: 'FilePlus',
-    color: '#ec4899',
-    bg: '#fce7f3',
+    color: '#0b78bf',
+    bg: '#e3f1fb',
   },
 ];
 
@@ -89,58 +96,58 @@ export const platformCapabilities = [
     description:
       'Upload trade documents and let AI extract fields, cross-check related documents, compare with trade history, and flag discrepancies.',
     icon: 'ScanLine',
-    color: '#2563eb',
-    bg: '#dbeafe',
+    color: '#1d5fd6',
+    bg: '#e2ecfa',
   },
   {
     title: 'Business Finance',
     description:
       'Apply across multiple finance categories and subcategories with requirements that adapt to each product — not a one-size-fits-all checklist.',
     icon: 'Landmark',
-    color: '#8b5cf6',
-    bg: '#ede9fe',
+    color: '#4c5fd5',
+    bg: '#eceffb',
   },
   {
     title: 'Network Management',
     description:
       'Build and visualize your network of buyers, suppliers, and logistics partners with an interactive relationship graph.',
     icon: 'Share2',
-    color: '#5eead4',
-    bg: '#d1fae5',
+    color: '#0f9a8a',
+    bg: '#ddf4ee',
   },
   {
     title: 'Lender Quotations',
     description:
       'Participating lenders independently review your application and provide quotations you can accept or reject — all tracked in a dashboard.',
     icon: 'Handshake',
-    color: '#f59e0b',
-    bg: '#fef3c7',
+    color: '#b7700b',
+    bg: '#fdf3da',
   },
   {
     title: 'E-Docs Studio',
     description:
       'Generate proforma invoices, sales contracts, purchase orders, export invoices, and packing lists from your company templates.',
     icon: 'FilePlus',
-    color: '#ec4899',
-    bg: '#fce7f3',
+    color: '#0b78bf',
+    bg: '#e3f1fb',
   },
   {
     title: 'Responsible AI',
     description:
       'AI assists with document checks and assessment — it never replaces professional review or the lender\u2019s final decision.',
     icon: 'ShieldCheck',
-    color: '#14b8a6',
-    bg: '#ccfbf1',
+    color: '#0f9a8a',
+    bg: '#ddf4ee',
   },
 ];
 
 export const documentTypes = [
-  { name: 'Commercial Invoice', short: 'CI', color: '#2563eb', bg: '#dbeafe' },
-  { name: 'Packing List', short: 'PL', color: '#8b5cf6', bg: '#ede9fe' },
-  { name: 'Bill of Lading', short: 'BL', color: '#5eead4', bg: '#d1fae5' },
-  { name: 'Purchase Order', short: 'PO', color: '#f59e0b', bg: '#fef3c7' },
-  { name: 'Letter of Credit', short: 'LC', color: '#ec4899', bg: '#fce7f3' },
-  { name: 'Certificate of Origin', short: 'COO', color: '#14b8a6', bg: '#ccfbf1' },
+  { name: 'Commercial Invoice', short: 'CI', color: '#1d5fd6', bg: '#e2ecfa' },
+  { name: 'Packing List', short: 'PL', color: '#4c5fd5', bg: '#eceffb' },
+  { name: 'Bill of Lading', short: 'BL', color: '#0f9a8a', bg: '#ddf4ee' },
+  { name: 'Purchase Order', short: 'PO', color: '#b7700b', bg: '#fdf3da' },
+  { name: 'Letter of Credit', short: 'LC', color: '#0b78bf', bg: '#e3f1fb' },
+  { name: 'Certificate of Origin', short: 'COO', color: '#0f9a8a', bg: '#ddf4ee' },
 ];
 
 export const analysisResult = {
@@ -179,8 +186,8 @@ export const financeCategories = [
   {
     id: 'pre-shipment',
     name: 'Pre-Shipment Finance',
-    color: '#2563eb',
-    bg: '#dbeafe',
+    color: '#1d5fd6',
+    bg: '#e2ecfa',
     subcategories: [
       { name: 'Packing Credit', requires: ['KYC Documents', 'Company Documents', 'P&L Statements', 'Provisional Financials'] },
       { name: 'Pre-Shipment Loan', requires: ['KYC Documents', 'Company Documents', 'Audited Financials', 'Purchase Order'] },
@@ -189,8 +196,8 @@ export const financeCategories = [
   {
     id: 'post-shipment',
     name: 'Post-Shipment Finance',
-    color: '#8b5cf6',
-    bg: '#ede9fe',
+    color: '#4c5fd5',
+    bg: '#eceffb',
     subcategories: [
       { name: 'Invoice Discounting', requires: ['KYC Documents', 'Company Documents', 'Commercial Invoice', 'Bill of Lading'] },
       { name: 'Bill Discounting', requires: ['KYC Documents', 'Company Documents', 'Bill of Lading', 'Letter of Credit'] },
@@ -199,8 +206,8 @@ export const financeCategories = [
   {
     id: 'lc',
     name: 'LC Discounting',
-    color: '#5eead4',
-    bg: '#d1fae5',
+    color: '#0f9a8a',
+    bg: '#ddf4ee',
     subcategories: [
       { name: 'LC Discounting', requires: ['KYC Documents', 'Company Documents', 'LC Draft', 'Supporting LC Documents'] },
       { name: 'Back-to-Back LC', requires: ['KYC Documents', 'Company Documents', 'LC Draft', 'Provisional Financials'] },
@@ -227,8 +234,8 @@ export const sampleQuotations = [
     amount: '$48,500',
     rate: '8.5% p.a.',
     tenure: '90 days',
-    color: '#2563eb',
-    bg: '#dbeafe',
+    color: '#1d5fd6',
+    bg: '#e2ecfa',
   },
   {
     id: 'q2',
@@ -237,8 +244,8 @@ export const sampleQuotations = [
     amount: '$48,500',
     rate: '9.2% p.a.',
     tenure: '120 days',
-    color: '#8b5cf6',
-    bg: '#ede9fe',
+    color: '#4c5fd5',
+    bg: '#eceffb',
   },
   {
     id: 'q3',
@@ -247,8 +254,8 @@ export const sampleQuotations = [
     amount: '—',
     rate: '—',
     tenure: '—',
-    color: '#f59e0b',
-    bg: '#fef3c7',
+    color: '#b7700b',
+    bg: '#fdf3da',
   },
 ];
 
@@ -261,12 +268,12 @@ export const lenderAssessmentNodes = [
 ];
 
 export const eDocTemplates = [
-  { name: 'Proforma Invoice', icon: 'FileText', color: '#2563eb', bg: '#dbeafe' },
-  { name: 'Sales Contract', icon: 'FileSignature', color: '#8b5cf6', bg: '#ede9fe' },
-  { name: 'Purchase Contract', icon: 'FileCheck', color: '#5eead4', bg: '#d1fae5' },
-  { name: 'Purchase Order', icon: 'ShoppingCart', color: '#f59e0b', bg: '#fef3c7' },
-  { name: 'Export Invoice', icon: 'Receipt', color: '#ec4899', bg: '#fce7f3' },
-  { name: 'Packing List', icon: 'Package', color: '#14b8a6', bg: '#ccfbf1' },
+  { name: 'Proforma Invoice', icon: 'FileText', color: '#1d5fd6', bg: '#e2ecfa' },
+  { name: 'Sales Contract', icon: 'FileSignature', color: '#4c5fd5', bg: '#eceffb' },
+  { name: 'Purchase Contract', icon: 'FileCheck', color: '#0f9a8a', bg: '#ddf4ee' },
+  { name: 'Purchase Order', icon: 'ShoppingCart', color: '#b7700b', bg: '#fdf3da' },
+  { name: 'Export Invoice', icon: 'Receipt', color: '#0b78bf', bg: '#e3f1fb' },
+  { name: 'Packing List', icon: 'Package', color: '#0f9a8a', bg: '#ddf4ee' },
 ];
 
 export const faqs = [

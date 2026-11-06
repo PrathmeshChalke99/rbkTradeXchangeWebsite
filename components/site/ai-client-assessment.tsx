@@ -32,15 +32,13 @@ export function AIClientAssessment() {
 
   const fitFactors = [
     { label: 'Document Completeness', value: 85, icon: FileCheck, color: '#10b981' },
-    { label: 'Financial Health', value: 72, icon: TrendingUp, color: '#2563eb' },
-    { label: 'Credit Profile Alignment', value: 68, icon: Gauge, color: '#8b5cf6' },
-    { label: 'Missing Information', value: 15, icon: AlertCircle, color: '#f59e0b' },
+    { label: 'Financial Health', value: 72, icon: TrendingUp, color: '#1d5fd6' },
+    { label: 'Credit Profile Alignment', value: 68, icon: Gauge, color: '#4c5fd5' },
+    { label: 'Missing Information', value: 15, icon: AlertCircle, color: '#b7700b' },
   ];
 
   return (
-    <section id="ai-assessment" className="relative py-20 sm:py-28 mesh-bg-soft overflow-hidden">
-      <div className="absolute top-1/2 left-1/4 h-72 w-72 rounded-full bg-brand-paleblue/30 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-brand-mint/25 blur-3xl pointer-events-none" />
+    <section id="ai-assessment" className="relative py-14 sm:py-20 bg-brand-paper overflow-hidden">
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -49,7 +47,7 @@ export function AIClientAssessment() {
           description="AI analyzes how closely your finance application aligns with each participating lender's criteria. The fit score is an estimate — not a loan approval guarantee."
         />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-2 items-center">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2 items-center">
           {/* Left: Lender network graph */}
           <div className="relative aspect-square max-w-md mx-auto w-full rounded-2xl border border-brand-paleblue bg-gradient-to-br from-brand-paleblue/10 via-white to-brand-mint/10 overflow-hidden">
             {/* Connection lines */}
@@ -61,7 +59,7 @@ export function AIClientAssessment() {
                   y1="50%"
                   x2={`${node.x}%`}
                   y2={`${node.y}%`}
-                  stroke={assessing ? '#60a5fa' : node.fit > 60 ? '#5eead4' : '#f59e0b'}
+                  stroke={assessing ? '#44a0dc' : node.fit > 60 ? '#0f9a8a' : '#b7700b'}
                   strokeWidth={1.5}
                   strokeDasharray="5 3"
                   animate={{ opacity: assessing ? [0.2, 0.8, 0.2] : [0.3, 0.6, 0.3] }}
@@ -84,8 +82,8 @@ export function AIClientAssessment() {
 
             {/* Lender nodes */}
             {lenderAssessmentNodes.map((node, i) => {
-              const color = node.fit > 70 ? '#10b981' : node.fit > 50 ? '#8b5cf6' : '#f59e0b';
-              const bg = node.fit > 70 ? '#d1fae5' : node.fit > 50 ? '#ede9fe' : '#fef3c7';
+              const color = node.fit > 70 ? '#10b981' : node.fit > 50 ? '#4c5fd5' : '#b7700b';
+              const bg = node.fit > 70 ? '#ddf4ee' : node.fit > 50 ? '#eceffb' : '#fdf3da';
               const nodeProgress = assessing ? Math.min(progress, node.fit) : node.fit;
               return (
                 <motion.div

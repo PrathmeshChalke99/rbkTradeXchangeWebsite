@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ArrowRight, BookOpen } from 'lucide-react';
+import Link from 'next/link';
+import { Check, ArrowRight, Info } from 'lucide-react';
 import { SectionHeading } from '@/components/site/section-heading';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const plans = [
@@ -13,8 +13,8 @@ const plans = [
     description: 'Essential tools for small import-export businesses',
     monthly: 999,
     annual: 9990,
-    color: '#2563eb',
-    bg: '#dbeafe',
+    color: '#1d5fd6',
+    bg: '#e2ecfa',
     features: [
       'Trade document management',
       'Basic AI document analysis',
@@ -30,8 +30,8 @@ const plans = [
     description: 'For growing businesses with active trade workflows',
     monthly: 2999,
     annual: 29990,
-    color: '#8b5cf6',
-    bg: '#ede9fe',
+    color: '#4c5fd5',
+    bg: '#eceffb',
     features: [
       'Everything in Starter',
       'Advanced AI document analysis',
@@ -49,8 +49,8 @@ const plans = [
     description: 'For large organizations with custom requirements',
     monthly: null,
     annual: null,
-    color: '#5eead4',
-    bg: '#d1fae5',
+    color: '#0f9a8a',
+    bg: '#ddf4ee',
     features: [
       'Everything in Professional',
       'AI client assessment',
@@ -69,125 +69,95 @@ export function PricingSection() {
   const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly');
 
   return (
-    <section id="pricing" className="relative py-20 sm:py-28 bg-white overflow-hidden">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-brand-paleblue/30 blur-3xl pointer-events-none" />
-
+    <section id="pricing" className="relative overflow-hidden bg-brand-paper py-14 sm:py-20">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Pricing"
+          eyebrow="Plans"
           title={<>Choose the plan that <span className="gradient-text">fits your trade</span></>}
-          description="Subscription plans with transparent entitlements. Prices shown are for illustration — actual plan configuration is managed within the platform."
+          description="Every plan includes the Trade Management portal. Upgrade as your document volume and finance activity grow."
         />
 
         {/* Billing toggle */}
-        <div className="mt-10 flex items-center justify-center gap-3">
-          <button
-            onClick={() => setBilling('monthly')}
-            className={cn(
-              'rounded-lg px-4 py-2 text-sm font-medium transition-all',
-              billing === 'monthly' ? 'bg-brand-blue text-white shadow-soft' : 'text-brand-slate hover:bg-brand-paleblue/40'
-            )}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setBilling('annual')}
-            className={cn(
-              'rounded-lg px-4 py-2 text-sm font-medium transition-all',
-              billing === 'annual' ? 'bg-brand-blue text-white shadow-soft' : 'text-brand-slate hover:bg-brand-paleblue/40'
-            )}
-          >
-            Annual
-            <span className="ml-1.5 rounded-full bg-brand-mint/60 px-2 py-0.5 text-[10px] font-semibold text-success">
-              Save ~17%
-            </span>
-          </button>
+        <div className="mt-8 flex justify-center">
+          <div role="radiogroup" aria-label="Billing period" className="inline-flex rounded-xl border border-brand-line bg-white p-1 shadow-soft">
+            {(['monthly', 'annual'] as const).map((b) => (
+              <button key={b} role="radio" aria-checked={billing === b} onClick={() => setBilling(b)}
+                className={cn('relative rounded-lg px-4 py-2 text-sm font-medium transition-colors', billing === b ? 'text-white' : 'text-brand-slate hover:text-brand-ink')}>
+                {billing === b && <motion.span layoutId="billing-pill" className="absolute inset-0 rounded-lg bg-brand-navy" transition={{ type: 'spring', stiffness: 400, damping: 34 }} />}
+                <span className="relative flex items-center gap-1.5">
+                  {b === 'monthly' ? 'Monthly' : 'Annual'}
+                  {b === 'annual' && <span className={cn('rounded-full px-1.5 py-0.5 text-[10px] font-semibold', billing === b ? 'bg-white/15 text-white' : 'bg-brand-mint text-brand-turquoise')}>Save ~17%</span>}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Plans */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {plans.map((plan) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5 }}
-              whileHover={{ y: -6 }}
-              className={cn(
-                'relative rounded-2xl border-2 p-6 transition-all',
-                plan.highlighted ? 'shadow-doc' : 'border-brand-paleblue/60 bg-white/80'
-              )}
-              style={plan.highlighted ? { borderColor: plan.color, background: plan.bg + '20' } : {}}
-            >
-              {plan.highlighted && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="rounded-full bg-brand-violet px-3 py-1 text-xs font-semibold text-white shadow-soft">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-4">
-                <h3 className="font-heading text-xl font-bold text-brand-ink">{plan.name}</h3>
-                <p className="text-sm text-brand-slate mt-1">{plan.description}</p>
-              </div>
-
-              <div className="mb-6 h-16">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={billing}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex items-baseline gap-1"
-                  >
-                    {plan.monthly === null ? (
-                      <span className="font-heading text-3xl font-bold text-brand-ink">Custom</span>
-                    ) : (
-                      <>
-                        <span className="font-heading text-4xl font-bold text-brand-ink">
-                          ₹{billing === 'monthly' ? plan.monthly!.toLocaleString('en-IN') : plan.annual!.toLocaleString('en-IN')}
-                        </span>
-                        <span className="text-sm text-brand-slate">/{billing === 'monthly' ? 'month' : 'year'}</span>
-                      </>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              <Button
+        <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
+          {plans.map((plan, i) => {
+            const dark = plan.highlighted;
+            const custom = plan.monthly === null;
+            return (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  'w-full mb-6 gap-2',
-                  plan.highlighted ? 'bg-brand-violet text-white hover:bg-brand-violet/90' : 'bg-brand-blue text-white hover:bg-brand-blue/90'
+                  'relative flex flex-col rounded-3xl p-6 sm:p-7 transition duration-300 hover:-translate-y-1',
+                  dark ? 'surface-dark on-dark shadow-lift' : 'border border-brand-line bg-white shadow-soft hover:shadow-lift',
                 )}
               >
-                {plan.monthly === null ? 'Contact Sales' : 'Get Started'}
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+                {dark && <div className="grid-lines absolute inset-0 rounded-3xl" aria-hidden />}
+                <div className="relative flex items-center justify-between">
+                  <h3 className={cn('text-lg font-semibold', dark ? 'text-white' : 'text-brand-ink')}>{plan.name}</h3>
+                  {dark && <span className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-[#8cc8f0] ring-1 ring-white/15">Most popular</span>}
+                </div>
+                <p className={cn('relative mt-1.5 text-sm', dark ? 'text-white/60' : 'text-brand-slate')}>{plan.description}</p>
 
-              <div className="space-y-2.5">
-                {plan.features.map((feature) => (
-                  <div key={feature} className="flex items-start gap-2.5">
-                    <div
-                      className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full"
-                      style={{ background: plan.bg }}
-                    >
-                      <Check className="h-3 w-3" style={{ color: plan.color }} />
-                    </div>
-                    <span className="text-sm text-brand-ink">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                <div className="relative mt-6 h-14">
+                  <AnimatePresence mode="wait">
+                    <motion.div key={billing} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="flex items-baseline gap-1">
+                      {custom ? (
+                        <span className={cn('font-heading text-3xl font-semibold', dark ? 'text-white' : 'text-brand-ink')}>Custom</span>
+                      ) : (
+                        <>
+                          <span className={cn('kbd-num font-heading text-4xl font-semibold tracking-tight', dark ? 'text-white' : 'text-brand-ink')}>
+                            ₹{billing === 'monthly' ? plan.monthly!.toLocaleString('en-IN') : plan.annual!.toLocaleString('en-IN')}
+                          </span>
+                          <span className={cn('text-sm', dark ? 'text-white/55' : 'text-brand-slate')}>/{billing === 'monthly' ? 'month' : 'year'}</span>
+                        </>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                <Link href={custom ? '/contact' : '/signup'} className={cn('relative mt-2 w-full', dark ? 'btn-light' : custom ? 'btn-secondary' : 'btn-primary')}>
+                  {custom ? 'Contact sales' : 'Get started'}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+
+                <ul className={cn('relative mt-6 space-y-2.5 border-t pt-6', dark ? 'border-white/10' : 'border-brand-line')}>
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2.5">
+                      <span className={cn('mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full', dark ? 'bg-white/10 text-[#8cc8f0]' : '')} style={dark ? undefined : { background: plan.bg, color: plan.color }}>
+                        <Check className="h-3 w-3" />
+                      </span>
+                      <span className={cn('text-sm', dark ? 'text-white/85' : 'text-brand-ink')}>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            );
+          })}
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-2 text-sm text-brand-slate">
-          <BookOpen className="h-4 w-4" />
-          Plan names, prices, and entitlements are shown for illustration. Actual configuration is managed within the platform.
-        </div>
+        <p className="mx-auto mt-8 flex max-w-2xl items-start justify-center gap-2 text-center text-xs text-brand-slate">
+          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          Plan names, prices and entitlements are shown for illustration. Actual configuration and billing are managed within the platform.
+        </p>
       </div>
     </section>
   );

@@ -1,59 +1,26 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = 'center',
-}: {
-  eyebrow?: string;
-  title: React.ReactNode;
-  description?: string;
-  className?: string;
-  align?: 'center' | 'left';
+const ease = [0.16, 1, 0.3, 1] as const;
+const item = { hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease } } };
+
+/** Heading for the interactive section components; visually identical to `Heading` in components/pages/section. */
+export function SectionHeading({ eyebrow, title, description, className, align = 'center' }: {
+  eyebrow?: string; title: React.ReactNode; description?: string; className?: string; align?: 'center' | 'left';
 }) {
   return (
     <motion.div
-      variants={staggerContainer}
+      variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
-      className={cn(
-        'max-w-2xl',
-        align === 'center' ? 'mx-auto text-center' : 'text-left',
-        className
-      )}
+      viewport={{ once: true, margin: '-60px' }}
+      className={cn('max-w-2xl', align === 'center' ? 'mx-auto text-center' : 'text-left', className)}
     >
-      {eyebrow && (
-        <motion.span
-          variants={fadeInUp}
-          className="inline-block rounded-full bg-brand-paleblue/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-blue mb-4"
-        >
-          {eyebrow}
-        </motion.span>
-      )}
-      <motion.h2
-        variants={fadeInUp}
-        className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-brand-ink"
-      >
-        {title}
-      </motion.h2>
-      {description && (
-        <motion.p
-          variants={fadeInUp}
-          className={cn(
-            'mt-4 text-lg text-brand-slate leading-relaxed',
-            align === 'center' && 'mx-auto'
-          )}
-        >
-          {description}
-        </motion.p>
-      )}
+      {eyebrow && <motion.span variants={item} className={cn('eyebrow mb-3', align === 'center' && 'justify-center')}>{eyebrow}</motion.span>}
+      <motion.h2 variants={item} className="text-h2 font-semibold text-brand-ink">{title}</motion.h2>
+      {description && <motion.p variants={item} className="mt-3 text-base leading-relaxed text-brand-slate sm:text-[1.05rem]">{description}</motion.p>}
     </motion.div>
   );
 }

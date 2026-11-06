@@ -68,9 +68,7 @@ export function AIDocumentIntelligence() {
   };
 
   return (
-    <section id="ai-intelligence" className="relative py-20 sm:py-28 mesh-bg overflow-hidden">
-      <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-brand-lavender/40 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-brand-paleblue/40 blur-3xl pointer-events-none" />
+    <section id="ai-intelligence" className="relative py-14 sm:py-20 bg-brand-paper overflow-hidden">
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -79,7 +77,7 @@ export function AIDocumentIntelligence() {
           description="Documents are uploaded, fields extracted, related documents cross-checked against trade history, and discrepancies flagged — all visualized in real time."
         />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-2 items-center">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2 items-center">
           {/* Left: Document carousel */}
           <div className="relative">
             <div className="flex items-center justify-center gap-2 mb-4">
@@ -128,7 +126,7 @@ export function AIDocumentIntelligence() {
                           <motion.div
                             key={field.label}
                             initial={{ opacity: 0.3 }}
-                            animate={{ opacity: 1, background: (phase === 'scanning' || phase === 'analyzing') ? ['#f0f7ff', '#dbeafe', '#f0f7ff'] : '#ffffff' }}
+                            animate={{ opacity: 1, background: (phase === 'scanning' || phase === 'analyzing') ? ['#f0f7ff', '#e2ecfa', '#f0f7ff'] : '#ffffff' }}
                             transition={{ duration: 0.5, delay: fi * 0.1, repeat: phase === 'scanning' ? Infinity : 0 }}
                             className="flex items-center justify-between rounded-lg px-2.5 py-1.5"
                           >
