@@ -54,7 +54,7 @@ export default function SignupPage() {
         return;
       }
 
-      router.push('/login');
+      router.push('https://dashboard.rbktradexchange.com/auth/login');
     } catch {
       setError('An unexpected error occurred. Please try again.');
     } finally {
@@ -110,7 +110,7 @@ export default function SignupPage() {
         </p>
         <p className="mt-8 border-t border-brand-line pt-6 text-center text-sm text-brand-slate">
           Already have an account?{' '}
-          <Link href="/login" className="font-semibold text-brand-blue hover:underline">Log in</Link>
+          <Link href="https://dashboard.rbktradexchange.com/auth/login" className="font-semibold text-brand-blue hover:underline">Log in</Link>
         </p>
       </div>
     </AuthShell>

@@ -215,10 +215,10 @@ export function Navbar() {
           </div>
 
           <div className="hidden shrink-0 items-center gap-2 lg:flex">
-            <Link href="/login" className={cn('rounded-lg px-3.5 py-2 text-[13.5px] font-medium transition-colors', solid ? 'text-brand-slate hover:text-brand-ink' : 'text-white/80 hover:text-white')}>
+            <Link href="https://dashboard.rbktradexchange.com/auth/login" className={cn('rounded-lg px-3.5 py-2 text-[13.5px] font-medium transition-colors', solid ? 'text-brand-slate hover:text-brand-ink' : 'text-white/80 hover:text-white')}>
               Log in
             </Link>
-            <Link href="/signup" className={cn(solid ? 'btn-primary' : 'btn-light', 'px-4 py-2 text-[13.5px]')}>
+            <Link href="https://dashboard.rbktradexchange.com/auth/sign-up" className={cn(solid ? 'btn-primary' : 'btn-light', 'px-4 py-2 text-[13.5px]')}>
               Get started
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -294,8 +294,8 @@ export function Navbar() {
                 <Link href="/contact" className="block px-3 py-3.5 text-[15px] font-semibold text-brand-ink">Contact</Link>
               </div>
               <div className="grid grid-cols-2 gap-2 border-t border-brand-line p-4">
-                <Link href="/login" className="btn-secondary">Log in</Link>
-                <Link href="/signup" className="btn-primary">Get started</Link>
+                <Link href="https://dashboard.rbktradexchange.com/auth/login" className="btn-secondary">Log in</Link>
+                <Link href="https://dashboard.rbktradexchange.com/auth/sign-up" className="btn-primary">Get started</Link>
               </div>
             </motion.div>
           </>

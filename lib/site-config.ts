@@ -36,8 +36,8 @@ export const siteConfig = {
       { label: 'Contact', href: '/contact' },
     ],
     Account: [
-      { label: 'Login', href: '/login' },
-      { label: 'Sign Up', href: '/signup' },
+      { label: 'Login', href: '/https://dashboard.rbktradexchange.com/auth/login' },
+      { label: 'Sign Up', href: '/https://dashboard.rbktradexchange.com/auth/sign-up' },
     ],
   },
 };
