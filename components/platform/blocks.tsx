@@ -9,10 +9,14 @@ import { Spot } from "./spot";
 
 type Cta = { label: string; href: string };
 
-/* ------------------------------------------------------------------ */
-/*  Capability cards: glossy icon, spotlight hover, drawn accent line   */
-/* ------------------------------------------------------------------ */
-const palette = ["#1d5fd6", "#e8684a", "#0f9a8a", "#0a3a7a", "#2f8fd0", "#1d5fd6"];
+const palette = [
+  "#1d5fd6",
+  "#e8684a",
+  "#0f9a8a",
+  "#0a3a7a",
+  "#2f8fd0",
+  "#1d5fd6",
+];
 
 export function CapabilityRows({
   items,
@@ -84,9 +88,6 @@ export function CapabilityRows({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Section wrapper with its own background style                      */
-/* ------------------------------------------------------------------ */
 export function Band({
   children,
   tone = "white",
@@ -131,7 +132,12 @@ export function BandHeading({
   center?: boolean;
 }) {
   return (
-    <Reveal className={cn("mb-10 max-w-2xl sm:mb-14", center && "mx-auto text-center")}>
+    <Reveal
+      className={cn(
+        "mb-10 max-w-2xl sm:mb-14",
+        center && "mx-auto text-center",
+      )}
+    >
       {eyebrow && (
         <span
           className={cn(
@@ -165,9 +171,6 @@ export function BandHeading({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Closing call to action with a per-page accent                      */
-/* ------------------------------------------------------------------ */
 export function ClosingCta({
   title,
   text,
@@ -182,11 +185,19 @@ export function ClosingCta({
   className?: string;
 }) {
   return (
-    <section className={cn("bg-white px-4 py-14 sm:px-6 sm:py-20 lg:px-8", className)}>
+    <section
+      className={cn("bg-white px-4 py-14 sm:px-6 sm:py-20 lg:px-8", className)}
+    >
       <Reveal variant="zoom">
         <div className="hero-night relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-14 text-center shadow-2xl sm:px-12 sm:py-20">
-          <div className="dot-grid-light absolute inset-0 opacity-40" aria-hidden />
-          <div className="aurora-blob -right-20 -top-24 h-80 w-80 bg-[#FA7F63]/25" aria-hidden />
+          <div
+            className="dot-grid-light absolute inset-0 opacity-40"
+            aria-hidden
+          />
+          <div
+            className="aurora-blob -right-20 -top-24 h-80 w-80 bg-[#FA7F63]/25"
+            aria-hidden
+          />
           <div className="relative mx-auto max-w-3xl">
             <h2 className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-5xl">
               {title}
@@ -218,10 +229,13 @@ export function ClosingCta({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Honest note shown where a real screenshot is not published yet     */
-/* ------------------------------------------------------------------ */
-export function Note({ children, dark }: { children: React.ReactNode; dark?: boolean }) {
+export function Note({
+  children,
+  dark,
+}: {
+  children: React.ReactNode;
+  dark?: boolean;
+}) {
   return (
     <p
       className={cn(
@@ -236,9 +250,6 @@ export function Note({ children, dark }: { children: React.ReactNode; dark?: boo
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Text + visual row. `visual` is any node (a frame, a list, a figure) */
-/* ------------------------------------------------------------------ */
 export function SplitRow({
   eyebrow,
   title,
@@ -310,7 +321,11 @@ export function SplitRow({
         )}
         {footer && <div className="mt-6">{footer}</div>}
       </Reveal>
-      <Reveal variant="zoom" delay={0.1} className={cn(reverse && "lg:order-1")}>
+      <Reveal
+        variant="zoom"
+        delay={0.1}
+        className={cn(reverse && "lg:order-1")}
+      >
         {visual}
       </Reveal>
     </div>

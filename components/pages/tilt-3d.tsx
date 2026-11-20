@@ -1,7 +1,13 @@
-'use client';
-import { useRef } from 'react';
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
-import { cn } from '@/lib/utils';
+"use client";
+import { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { cn } from "@/lib/utils";
 
 /**
  * Wraps content in a 3D card that tilts toward the pointer and catches a soft glare.
@@ -17,7 +23,7 @@ export function Tilt3D({
 }: {
   children: React.ReactNode;
   className?: string;
-  /** maximum tilt in degrees */
+
   max?: number;
   lift?: number;
   glare?: boolean;
@@ -30,14 +36,18 @@ export function Tilt3D({
   const sy = useSpring(py, { stiffness: 180, damping: 18 });
   const rotateY = useTransform(sx, [0, 1], [-max, max]);
   const rotateX = useTransform(sy, [0, 1], [max, -max]);
-  const glareBg = useTransform([sx, sy], ([x, y]: number[]) => `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.38), transparent 55%)`);
+  const glareBg = useTransform(
+    [sx, sy],
+    ([x, y]: number[]) =>
+      `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.38), transparent 55%)`,
+  );
 
   if (reduce) return <div className={className}>{children}</div>;
 
   return (
     <div
       ref={ref}
-      className={cn('group/tilt [perspective:1100px]', className)}
+      className={cn("group/tilt [perspective:1100px]", className)}
       onPointerMove={(e) => {
         const r = ref.current?.getBoundingClientRect();
         if (!r) return;
@@ -49,7 +59,12 @@ export function Tilt3D({
         py.set(0.5);
       }}
     >
-      <motion.div style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }} whileHover={{ scale: lift }} transition={{ type: 'spring', stiffness: 220, damping: 20 }} className="relative h-full w-full">
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        whileHover={{ scale: lift }}
+        transition={{ type: "spring", stiffness: 220, damping: 20 }}
+        className="relative h-full w-full"
+      >
         {children}
         {glare && (
           <motion.span

@@ -109,7 +109,6 @@ export function LCDiscrepancy() {
         />
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          {/* Document layers visualization */}
           <div className="relative">
             <div className="rounded-2xl border border-brand-paleblue bg-gradient-to-br from-brand-lavender/10 via-white to-brand-pink/10 p-6 min-h-[360px]">
               <div className="flex items-center gap-2 mb-4">
@@ -225,7 +224,6 @@ export function LCDiscrepancy() {
             </div>
           </div>
 
-          {/* Discrepancy report */}
           <div className="rounded-2xl border border-brand-paleblue bg-white/90 p-5">
             <div className="flex items-center gap-2 mb-4">
               <FileWarning className="h-5 w-5 text-brand-violet" />
@@ -326,7 +324,6 @@ export function LCDiscrepancy() {
           </div>
         </div>
 
-        {/* Hand-off to Step 3 */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

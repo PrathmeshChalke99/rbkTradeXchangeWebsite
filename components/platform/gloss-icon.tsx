@@ -1,7 +1,6 @@
 import type { AnyIcon } from "./icons";
 import { cn } from "@/lib/utils";
 
-/** Lighten (+) or darken (-) a #rrggbb colour. */
 function adj(hex: string, amt: number) {
   const h = hex.replace("#", "");
   const n = parseInt(h.length === 3 ? h.replace(/(.)/g, "$1$1") : h, 16);
@@ -51,6 +50,36 @@ export function GlossIcon({
       }}
     >
       <I strokeWidth={2} />
+    </span>
+  );
+}
+
+export function LogoTile({
+  src,
+  alt,
+  size = "md",
+  className,
+}: {
+  src: string;
+  alt: string;
+  size?: keyof typeof sizes;
+  className?: string;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex shrink-0 items-center justify-center overflow-hidden bg-white p-1.5 ring-1 ring-brand-line transition-transform duration-300 ease-out-expo group-hover:-translate-y-0.5 group-hover:scale-110",
+        sizes[size].split(" [&>svg]")[0],
+        className,
+      )}
+    >
+      {}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="h-full w-full object-contain"
+      />
     </span>
   );
 }

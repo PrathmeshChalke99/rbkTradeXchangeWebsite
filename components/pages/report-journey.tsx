@@ -112,22 +112,32 @@ const steps = [
 
 type Pdf = (typeof steps)[number]["pdf"];
 
-/** Explains the PDF in plain words, with Preview (modal) and Download. */
 function PdfBar({ pdf }: { pdf: Pdf }) {
   return (
     <div className="mt-5 rounded-2xl border border-brand-line bg-white p-4 shadow-soft">
       <div className="flex flex-col gap-4">
         <div className="flex items-start gap-4">
-        <span className="relative flex h-14 w-11 shrink-0 items-center justify-center rounded-md border border-brand-line bg-brand-paper">
-          <span className="absolute right-0 top-0 h-3 w-3 rounded-bl-md bg-brand-accent" aria-hidden />
-          <FileText className="h-5 w-5 text-brand-ink" />
-          <span className="absolute -bottom-2 rounded bg-brand-navy px-1 font-mono text-[8px] font-semibold text-white">PDF</span>
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-brand-accent-dark">Sample PDF report</p>
-          <p className="mt-0.5 text-[15px] font-semibold text-brand-ink">{pdf.name}</p>
-          <p className="text-[13px] leading-snug text-brand-slate">{pdf.what}</p>
-        </div>
+          <span className="relative flex h-14 w-11 shrink-0 items-center justify-center rounded-md border border-brand-line bg-brand-paper">
+            <span
+              className="absolute right-0 top-0 h-3 w-3 rounded-bl-md bg-brand-accent"
+              aria-hidden
+            />
+            <FileText className="h-5 w-5 text-brand-ink" />
+            <span className="absolute -bottom-2 rounded bg-brand-navy px-1 font-mono text-[8px] font-semibold text-white">
+              PDF
+            </span>
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-brand-accent-dark">
+              Sample PDF report
+            </p>
+            <p className="mt-0.5 text-[15px] font-semibold text-brand-ink">
+              {pdf.name}
+            </p>
+            <p className="text-[13px] leading-snug text-brand-slate">
+              {pdf.what}
+            </p>
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
           <Dialog>
@@ -139,14 +149,18 @@ function PdfBar({ pdf }: { pdf: Pdf }) {
             <DialogContent className="w-[96vw] max-w-4xl gap-0 overflow-hidden p-0 sm:rounded-2xl">
               <div className="flex items-center justify-between gap-3 border-b border-brand-line bg-white px-5 py-3 pr-12">
                 <div className="min-w-0">
-                  <DialogTitle className="truncate text-base font-semibold text-brand-ink">{pdf.name}</DialogTitle>
-                  <DialogDescription className="text-xs text-brand-slate">Sample report with illustrative data.</DialogDescription>
+                  <DialogTitle className="truncate text-base font-semibold text-brand-ink">
+                    {pdf.name}
+                  </DialogTitle>
+                  <DialogDescription className="text-xs text-brand-slate">
+                    Sample report with illustrative data.
+                  </DialogDescription>
                 </div>
                 <a href={pdf.file} download className="btn-secondary shrink-0">
                   <Download className="h-4 w-4" /> Download
                 </a>
               </div>
-              {/* <object> shows the PDF where the browser has a viewer, and its children where it doesn't */}
+
               <object
                 data={`${pdf.file}#view=FitH`}
                 type="application/pdf"
@@ -158,10 +172,16 @@ function PdfBar({ pdf }: { pdf: Pdf }) {
                     <FileText className="h-7 w-7 text-brand-accent-dark" />
                   </span>
                   <p className="max-w-sm text-sm text-brand-slate">
-                    Your browser can&apos;t show PDFs inside the page. Open the report in a new tab or download it.
+                    Your browser can&apos;t show PDFs inside the page. Open the
+                    report in a new tab or download it.
                   </p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    <a href={pdf.file} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                    <a
+                      href={pdf.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary"
+                    >
                       <Eye className="h-4 w-4" /> Open in new tab
                     </a>
                     <a href={pdf.file} download className="btn-secondary">
@@ -172,14 +192,18 @@ function PdfBar({ pdf }: { pdf: Pdf }) {
               </object>
             </DialogContent>
           </Dialog>
-          <a href={pdf.file} download className="btn-secondary" aria-label={`Download ${pdf.name}`}>
+          <a
+            href={pdf.file}
+            download
+            className="btn-secondary"
+            aria-label={`Download ${pdf.name}`}
+          >
             <Download className="h-4 w-4" />
             <span className="hidden sm:inline">Download</span>
           </a>
         </div>
       </div>
 
-      {/* How the report comes about, in three plain steps */}
       <ol className="mt-4 grid gap-2 border-t border-brand-line pt-4 text-[12.5px] text-brand-slate sm:grid-cols-3">
         {[
           { i: UploadCloud, t: "You upload your trade documents" },
@@ -190,7 +214,12 @@ function PdfBar({ pdf }: { pdf: Pdf }) {
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-accent-soft text-brand-accent-dark">
               <s.i className="h-3.5 w-3.5" />
             </span>
-            <span><b className="mr-1 font-mono text-[11px] text-brand-accent-dark">{k + 1}</b>{s.t}</span>
+            <span>
+              <b className="mr-1 font-mono text-[11px] text-brand-accent-dark">
+                {k + 1}
+              </b>
+              {s.t}
+            </span>
           </li>
         ))}
       </ol>
@@ -222,8 +251,11 @@ export function ReportJourney() {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* Step list */}
-      <ul role="tablist" aria-label="Platform steps" className="space-y-2 lg:pt-4">
+      <ul
+        role="tablist"
+        aria-label="Platform steps"
+        className="space-y-2 lg:pt-4"
+      >
         {steps.map((s, k) => {
           const active = k === i;
           const Icon = s.icon;
@@ -256,7 +288,12 @@ export function ReportJourney() {
                     <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-brand-slate/70">
                       Step {k + 1}
                     </p>
-                    <p className={cn("text-[15px] font-semibold transition-colors", active ? "text-brand-ink" : "text-brand-slate")}>
+                    <p
+                      className={cn(
+                        "text-[15px] font-semibold transition-colors",
+                        active ? "text-brand-ink" : "text-brand-slate",
+                      )}
+                    >
                       {s.title}
                     </p>
                   </div>
@@ -271,8 +308,14 @@ export function ReportJourney() {
                       transition={{ duration: 0.4, ease }}
                       className="overflow-hidden"
                     >
-                      <p className="mt-3 text-sm leading-relaxed text-brand-slate">{s.text}</p>
-                      <Link href={s.href} className="link-arrow mt-3" onClick={(e) => e.stopPropagation()}>
+                      <p className="mt-3 text-sm leading-relaxed text-brand-slate">
+                        {s.text}
+                      </p>
+                      <Link
+                        href={s.href}
+                        className="link-arrow mt-3"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         {s.cta}
                         <ArrowRight className="h-4 w-4" />
                       </Link>
@@ -287,7 +330,10 @@ export function ReportJourney() {
                       className="absolute inset-y-0 left-0 rounded-full bg-brand-accent"
                       initial={{ width: running ? "0%" : "100%" }}
                       animate={{ width: "100%" }}
-                      transition={{ duration: running ? DURATION / 1000 : 0, ease: "linear" }}
+                      transition={{
+                        duration: running ? DURATION / 1000 : 0,
+                        ease: "linear",
+                      }}
                     />
                   </span>
                 )}
@@ -297,7 +343,6 @@ export function ReportJourney() {
         })}
       </ul>
 
-      {/* Visual + PDF: remounts per step so each report replays its animation */}
       <div className="relative min-h-[420px]">
         <AnimatePresence mode="wait">
           <motion.div

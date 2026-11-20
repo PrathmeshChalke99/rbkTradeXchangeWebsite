@@ -8,7 +8,7 @@ export type Shot = {
   w: number;
   h: number;
   alt: string;
-  /** Visible horizontal slice as fractions of the width, e.g. [0.4, 1] hides the left app sidebar. */
+
   crop?: [number, number];
 };
 
@@ -25,7 +25,7 @@ export const shots = {
     h: 4275,
     alt: "Trade Management: a 21-step export trade with purchase order, proforma invoice, sales contract and LC draft checks",
   },
-  /** The trade timeline only: no app sidebar, so it never reads as the dashboard. */
+
   tradeFlow: {
     src: "/platform/tradeai/tradeai-overview.png",
     w: 1310,
@@ -77,7 +77,6 @@ export const shots = {
   },
 } satisfies Record<string, Shot>;
 
-/** Add short MP4 recordings here once personal data is removed from them. */
 export const videos: Record<string, string> = {};
 
 export const LOGIN_URL = "https://dashboard.rbktradexchange.com/auth/login";

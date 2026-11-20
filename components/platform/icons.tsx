@@ -18,7 +18,13 @@ export type AnyIcon = ComponentType<{
 
 const files = new Set<string>(manifest.files);
 
-function Svg({ className, children }: { className?: string; children: ReactNode }) {
+function Svg({
+  className,
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
   return (
     <svg
       viewBox="0 0 64 64"
@@ -39,7 +45,6 @@ function Svg({ className, children }: { className?: string; children: ReactNode 
 function icon(key: string, draw: ReactNode): AnyIcon {
   const Comp = ({ className }: { className?: string }) =>
     files.has(key) ? (
-      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={`/icons/${key}.png`}
         alt=""
@@ -54,7 +59,8 @@ function icon(key: string, draw: ReactNode): AnyIcon {
   return Comp;
 }
 
-const DOC = "M14 6h24l12 12v36a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z";
+const DOC =
+  "M14 6h24l12 12v36a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z";
 const dot = { fill: "currentColor", stroke: "none" } as const;
 
 export const GlobeIcon = icon(
@@ -137,7 +143,10 @@ export const DocIcon = icon(
     <path d={DOC} />
     <path d="M38 6v12h12" />
     <circle cx="28" cy="31" r="8.5" />
-    <path d="M28 25v12M31.5 28c-1-2-7-2-7 1.2 0 3.6 7.2 1.6 7.2 5.4 0 2.6-5 2.8-7.2.8" strokeWidth={2.6} />
+    <path
+      d="M28 25v12M31.5 28c-1-2-7-2-7 1.2 0 3.6 7.2 1.6 7.2 5.4 0 2.6-5 2.8-7.2.8"
+      strokeWidth={2.6}
+    />
     <path d="M18 49h14" />
   </>,
 );

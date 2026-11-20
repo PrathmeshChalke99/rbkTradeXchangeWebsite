@@ -71,7 +71,6 @@ export function FinanceExplorer() {
                 <span className="block text-sm font-semibold leading-tight">
                   {cat.name}
                 </span>
-                {/* <span className={cn('mt-0.5 block truncate text-xs', on ? 'text-white/65' : 'text-brand-slate')}>{cat.short}</span> */}
               </span>
             </button>
           );

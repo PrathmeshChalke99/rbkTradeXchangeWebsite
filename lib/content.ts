@@ -26,12 +26,8 @@ export const IMG = {
   responsible: "/images/responsible-ai.svg",
 };
 
-/* ------------------------------------------------------------------ */
-/* FINANCE: 3 categories -> 11 products -> 34 sub-products             */
-/* ------------------------------------------------------------------ */
 export type Sub = { name: string; desc: string };
 export type Product = {
-  /** Optional looping video used by the navbar menu card. */
   video?: string;
   slug: string;
   value: string;
@@ -702,11 +698,7 @@ export const getProduct = (cat: string, slug: string) => {
   return c && p ? { category: c, product: p } : undefined;
 };
 
-/* ------------------------------------------------------------------ */
-/* PLATFORM MODULES                                                    */
-/* ------------------------------------------------------------------ */
 export type Module = {
-  /** Optional looping video used by the navbar menu card. */
   video?: string;
   photo?: string;
   slug: string;
@@ -873,9 +865,6 @@ export const modules: Module[] = [
 ];
 export const getModule = (slug: string) => modules.find((m) => m.slug === slug);
 
-/* ------------------------------------------------------------------ */
-/* E-DOCS                                                              */
-/* ------------------------------------------------------------------ */
 export type EDoc = {
   photo?: string;
   slug: string;
@@ -933,28 +922,28 @@ export const eDocs: EDoc[] = [
       "Define governing law and jurisdiction",
     ],
   },
-  {
-    slug: "purchase-contract",
-    name: "Purchase Contract",
-    label: "PURCHASE CONTRACT",
-    color: "#0f9a8a",
-    bg: "#ddf4ee",
-    short: "The agreement with your own supplier.",
-    usedWhen:
-      "Used when a trader or exporter buys goods from a supplier to fulfil a customer order.",
-    fields: [
-      "Supplier and buyer details",
-      "Product specification",
-      "Price and payment schedule",
-      "Delivery timeline",
-      "Penalties and warranties",
-    ],
-    tips: [
-      "Back-to-back the dates with the sales contract",
-      "Agree quality checks before shipment",
-      "Record packaging requirements",
-    ],
-  },
+  // {
+  //   slug: "purchase-contract",
+  //   name: "Purchase Contract",
+  //   label: "PURCHASE CONTRACT",
+  //   color: "#0f9a8a",
+  //   bg: "#ddf4ee",
+  //   short: "The agreement with your own supplier.",
+  //   usedWhen:
+  //     "Used when a trader or exporter buys goods from a supplier to fulfil a customer order.",
+  //   fields: [
+  //     "Supplier and buyer details",
+  //     "Product specification",
+  //     "Price and payment schedule",
+  //     "Delivery timeline",
+  //     "Penalties and warranties",
+  //   ],
+  //   tips: [
+  //     "Back-to-back the dates with the sales contract",
+  //     "Agree quality checks before shipment",
+  //     "Record packaging requirements",
+  //   ],
+  // },
   {
     slug: "purchase-order",
     name: "Purchase Order",
@@ -1024,9 +1013,6 @@ export const eDocs: EDoc[] = [
 ];
 export const getDoc = (slug: string) => eDocs.find((d) => d.slug === slug);
 
-/* ------------------------------------------------------------------ */
-/* RESOURCES (articles)                                                */
-/* ------------------------------------------------------------------ */
 export type Article = {
   photo?: string;
   slug: string;
@@ -1205,9 +1191,6 @@ export const resources: Article[] = [
 export const getArticle = (slug: string) =>
   resources.find((r) => r.slug === slug);
 
-/* ------------------------------------------------------------------ */
-/* SITE FLOW                                                           */
-/* ------------------------------------------------------------------ */
 export const flow = [
   {
     id: "01",
@@ -1243,7 +1226,7 @@ export const flow = [
   {
     id: "04",
     title: "Choose a plan",
-    body: "Pricing explains plans and entitlements for the Trade Management portal.",
+    body: "Pricing explains plans and entitlements for the Trade Portal.",
     links: [
       ["Pricing", "/pricing"],
       ["FAQ", "/faq"],
@@ -1261,7 +1244,6 @@ export const flow = [
   },
 ];
 
-/* photos for modules, documents and articles (illustration in `image` is the fallback) */
 const MP: Record<string, string> = {
   "ai-document-analysis": P.analyticsTablet,
   "business-finance": P.financialDistrict,

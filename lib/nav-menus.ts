@@ -24,22 +24,24 @@ export type MenuCard = {
   href: string;
   text: string;
   icon: AnyIcon;
-  /** Accent colour of the icon tile. */
+
   tint: string;
+
+  logo?: string;
 };
 
 export type MenuDef = {
   title: string;
   subtitle: string;
-  /** Showcase visual in the intro column (real platform screenshot). */
+
   image: string;
   pos: string;
-  /** Zoom (origin top-right) so app chrome like the sidebar falls outside the crop. */
+
   zoom?: number;
   cta: { href: string; label: string; text: string };
   cards: MenuCard[];
   stripLabel: string;
-  /** Extra links shown only in the scrolling strip (keeps older pages reachable). */
+
   extra: { label: string; href: string; icon: AnyIcon }[];
 };
 
@@ -75,6 +77,7 @@ export const platformMenu: MenuDef = {
       text: "International payment collection in India.",
       icon: WalletIcon,
       tint: "#2f8fd0",
+      logo: "/rbk_pay.png",
     },
     {
       label: "Exim World Advisory",
@@ -82,6 +85,7 @@ export const platformMenu: MenuDef = {
       text: "Advisory for your trade journey.",
       icon: GlobeIcon,
       tint: "#e8684a",
+      logo: "/exim_world.jpeg",
     },
     // { label: "Lender Quotations", href: "/platform/lender-quotations", text: "Compare and track quotations.", icon: QuoteIcon, tint: "#e8684a" },
     // { label: "Responsible AI", href: "/platform/responsible-ai", text: "AI that assists, people decide.", icon: ShieldIcon, tint: "#0f9a8a" },

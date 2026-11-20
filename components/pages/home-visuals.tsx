@@ -19,9 +19,6 @@ import { cn } from "@/lib/utils";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-/* ------------------------------------------------------------------ */
-/* Who the platform connects — animated hub diagram (unchanged)        */
-/* ------------------------------------------------------------------ */
 const parties = [
   {
     side: "left",
@@ -194,23 +191,11 @@ export function ConnectMap() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Animated frame around your REAL platform screenshots                */
-/*                                                                     */
-/* The screenshot stays the source of truth. The animation shows the   */
-/* activity that produced it:                                          */
-/*   1. screenshot comes into focus when the section scrolls in        */
-/*   2. a scan beam sweeps while the "AI" works                        */
-/*   3. status callouts pop onto the report at the right moment        */
-/*   4. an activity bar under the image ticks through each step        */
-/* Plays once. Reduced-motion users get the final state immediately.   */
-/* ------------------------------------------------------------------ */
 type Tone = "ok" | "warn" | "err" | "info";
 
 type Callout = {
-  /** shows once this many steps have completed */
   at: number;
-  /** position on the screenshot, in % of its box */
+
   x: number;
   y: number;
   label: string;
@@ -253,19 +238,18 @@ function useSequence(total: number, stepMs = 900) {
 }
 
 type ReportFrameProps = {
-  /** small label shown on the image, e.g. "Live platform" */
   badge: string;
   accent: "emerald" | "amber" | "violet";
   src: string;
   alt: string;
-  /** activity timeline shown under the image, one entry per step */
+
   steps: string[];
-  /** label once every step is complete */
+
   doneLabel: string;
   callouts?: Callout[];
   fallback?: ReactNode;
   tall?: boolean;
-  /** ms per step */
+
   stepMs?: number;
   priority?: boolean;
 };
@@ -284,7 +268,7 @@ function ReportFrame({
   priority = false,
 }: ReportFrameProps) {
   const { ref, step, done, scanning } = useSequence(steps.length, stepMs);
-  // A missing screenshot can fail before React attaches onError, so also check after mount.
+
   const [failed, setFailed] = useState(false);
   useEffect(() => {
     const img = (ref.current as HTMLElement | null)?.querySelector("img");
@@ -302,7 +286,6 @@ function ReportFrame({
       ref={ref}
       className="relative isolate mx-auto w-full max-w-[620px] py-6"
     >
-      {/* Background glow */}
       <div
         className={cn(
           "absolute -inset-5 -z-10 rounded-[2rem] bg-gradient-to-br opacity-80 blur-xl",
@@ -317,14 +300,12 @@ function ReportFrame({
           tall ? "aspect-[3/4]" : "aspect-[4/3]",
         )}
       >
-        {/* Screenshot: blurred/dim until the first step completes */}
         <div
           className={cn(
             "absolute inset-0 overflow-hidden rounded-[24px] transition-all duration-700",
             step >= 1 ? "opacity-100 blur-0" : "opacity-40 blur-[3px]",
           )}
         >
-          {/* A .pdf src shows your actual PDF report; anything else is an image. */}
           {src.toLowerCase().endsWith(".pdf") ? (
             <iframe
               src={`${src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
@@ -344,7 +325,6 @@ function ReportFrame({
             />
           )}
 
-          {/* Scan beam */}
           {scanning && (
             <motion.div
               aria-hidden
@@ -369,7 +349,6 @@ function ReportFrame({
           </div>
         )}
 
-        {/* Status callouts pinned onto the report */}
         {callouts.map(
           (c) =>
             step >= c.at && (
@@ -389,7 +368,6 @@ function ReportFrame({
             ),
         )}
 
-        {/* Full PDF link (PDF sources only). Mobile browsers often show just page 1 inline. */}
         {src.toLowerCase().endsWith(".pdf") && (
           <a
             href={src}
@@ -401,7 +379,6 @@ function ReportFrame({
           </a>
         )}
 
-        {/* Source badge */}
         <span className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 text-[10.5px] font-semibold text-neutral-700 shadow-sm backdrop-blur">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 motion-safe:animate-ping" />
@@ -411,7 +388,6 @@ function ReportFrame({
         </span>
       </div>
 
-      {/* Activity bar: what the platform is doing right now */}
       <div className="mt-5 flex items-center gap-3 rounded-xl border border-neutral-200 bg-white/80 px-3.5 py-2.5 shadow-sm backdrop-blur">
         {done ? (
           <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
@@ -419,7 +395,7 @@ function ReportFrame({
           <Loader2 className="h-4 w-4 shrink-0 animate-spin text-amber-600 motion-reduce:animate-none" />
         )}
         <p className="min-w-0 flex-1 truncate text-[13px] font-medium text-neutral-800">
-          {done ? doneLabel : steps[step] ?? steps[0]}
+          {done ? doneLabel : (steps[step] ?? steps[0])}
         </p>
         <div className="flex shrink-0 items-center gap-1" aria-hidden>
           {steps.map((s, i) => (
@@ -437,9 +413,6 @@ function ReportFrame({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Step 1 — Document cross-check                                       */
-/* ------------------------------------------------------------------ */
 export function DocCheckVisual() {
   return (
     <ReportFrame
@@ -454,8 +427,6 @@ export function DocCheckVisual() {
         "Labelling mismatches by severity…",
       ]}
       doneLabel="Report ready for your team's review"
-      // TUNE: x / y are % positions on YOUR screenshot. Move them so each
-      // callout sits next to the matching row, or delete callouts you don't need.
       callouts={[
         { at: 2, x: 70, y: 38, label: "Matched", tone: "ok" },
         { at: 3, x: 70, y: 52, label: "Warning", tone: "warn" },
@@ -574,9 +545,6 @@ function DocCheckFallback() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Step 2 — LC discrepancy                                             */
-/* ------------------------------------------------------------------ */
 export function DocPipelineVisual() {
   return (
     <ReportFrame
@@ -591,7 +559,6 @@ export function DocPipelineVisual() {
         "Drafting suggested corrections…",
       ]}
       doneLabel="Discrepancy report ready before presentation to the bank"
-      // TUNE: position these on your lc_discrepancy.png
       callouts={[
         { at: 3, x: 68, y: 40, label: "Late shipment date", tone: "err" },
         { at: 4, x: 68, y: 62, label: "Fix suggested", tone: "info" },
@@ -704,9 +671,6 @@ function LcDiscrepancyFallback() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Step 3 — Finance readiness report                                   */
-/* ------------------------------------------------------------------ */
 export function FinanceReadinessVisual() {
   return (
     <ReportFrame
@@ -810,9 +774,6 @@ function ReadinessFallback() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Lender quotations — real screenshot + live lender activity          */
-/* ------------------------------------------------------------------ */
 export function QuoteVisual() {
   return (
     <ReportFrame
@@ -828,7 +789,6 @@ export function QuoteVisual() {
       ]}
       doneLabel="Compare quotations. The decision stays yours"
       priority
-      // TUNE: position on your quote.png, or remove
       callouts={[
         { at: 3, x: 68, y: 38, label: "Quote received", tone: "ok" },
         { at: 4, x: 68, y: 60, label: "Best rate", tone: "info" },
@@ -837,9 +797,6 @@ export function QuoteVisual() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Trade document coverage strip (unchanged)                           */
-/* ------------------------------------------------------------------ */
 export function DocTypeChips() {
   const extra = [
     {

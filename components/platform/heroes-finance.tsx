@@ -2,22 +2,26 @@
 
 import { type CSSProperties } from "react";
 import { HeroCopy, heroPad } from "./hero-copy";
+import { Crumbs } from "@/components/documents/doc-heroes";
 import { cn } from "@/lib/utils";
 
 const wd = (w: number, d: number) =>
   ({ "--w": `${w}%`, animationDelay: `${d}s` }) as CSSProperties;
 
-/** Three finance category heroes, each with its own scene. */
 export function CategoryHero({
   slug,
   name,
   stage,
   description,
+  productCount,
+  subCount,
 }: {
   slug: string;
   name: string;
   stage: string;
   description: string;
+  productCount?: number;
+  subCount?: number;
 }) {
   const bg =
     slug === "international-trade-finance"
@@ -35,13 +39,29 @@ export function CategoryHero({
           heroPad,
         )}
       >
-        <HeroCopy
-          eyebrow={stage}
-          title={name}
-          text={description}
-          primary={{ label: "Apply now", href: "/signup" }}
-          secondary={{ label: "Talk to our team", href: "/contact" }}
-        />
+        <div>
+          <Crumbs
+            items={[{ label: "Finance", href: "/finance" }, { label: name }]}
+          />
+          <HeroCopy
+            eyebrow={stage}
+            title={name}
+            text={description}
+            primary={{ label: "Apply now", href: "/signup" }}
+            secondary={{ label: "Talk to our team", href: "/contact" }}
+          />
+          {(productCount || subCount) && (
+            <ul className="mt-7 flex flex-wrap gap-2" aria-label="At a glance">
+              {productCount ? (
+                <li className="chip">{productCount} products</li>
+              ) : null}
+              {subCount ? (
+                <li className="chip">{subCount} sub-products</li>
+              ) : null}
+              <li className="chip">{stage}</li>
+            </ul>
+          )}
+        </div>
         <div className="rounded-[2rem] border border-white bg-white/80 p-5 shadow-lift backdrop-blur sm:p-8">
           {slug === "international-trade-finance" && <ShipRoute />}
           {slug === "domestic-supply-chain-finance" && <ChainFlow />}
@@ -55,9 +75,26 @@ export function CategoryHero({
 export function ShipRoute() {
   const d = "M 70 190 C 160 20, 360 20, 450 190";
   return (
-    <svg viewBox="0 0 520 260" className="h-auto w-full" role="img" aria-label="Goods moving from exporter to importer">
-      <path d={d} fill="none" stroke="#022350" strokeOpacity="0.15" strokeWidth="2" />
-      <path d={d} fill="none" stroke="#1d5fd6" strokeWidth="2.4" className="flow-dash" />
+    <svg
+      viewBox="0 0 520 260"
+      className="h-auto w-full"
+      role="img"
+      aria-label="Goods moving from exporter to importer"
+    >
+      <path
+        d={d}
+        fill="none"
+        stroke="#022350"
+        strokeOpacity="0.15"
+        strokeWidth="2"
+      />
+      <path
+        d={d}
+        fill="none"
+        stroke="#1d5fd6"
+        strokeWidth="2.4"
+        className="flow-dash"
+      />
       <g>
         <circle r="9" fill="#022350">
           <animateMotion dur="6s" repeatCount="indefinite" path={d} />
@@ -71,8 +108,22 @@ export function ShipRoute() {
         [450, 190, "Importer"],
       ].map(([x, y, l]) => (
         <g key={String(l)}>
-          <circle cx={Number(x)} cy={Number(y)} r="12" fill="#fff" stroke="#022350" strokeWidth="2.5" />
-          <text x={Number(x)} y={Number(y) + 34} textAnchor="middle" className="fill-[#022350] text-[13px] font-bold">{l}</text>
+          <circle
+            cx={Number(x)}
+            cy={Number(y)}
+            r="12"
+            fill="#fff"
+            stroke="#022350"
+            strokeWidth="2.5"
+          />
+          <text
+            x={Number(x)}
+            y={Number(y) + 34}
+            textAnchor="middle"
+            className="fill-[#022350] text-[13px] font-bold"
+          >
+            {l}
+          </text>
         </g>
       ))}
       {[
@@ -81,8 +132,22 @@ export function ShipRoute() {
         [360, 80, "Post-shipment"],
       ].map(([x, y, l]) => (
         <g key={String(l)}>
-          <rect x={Number(x) - 48} y={Number(y) - 14} width="96" height="26" rx="13" fill="#FA7F63" />
-          <text x={Number(x)} y={Number(y) + 4} textAnchor="middle" className="fill-[#022350] text-[11px] font-bold">{l}</text>
+          <rect
+            x={Number(x) - 48}
+            y={Number(y) - 14}
+            width="96"
+            height="26"
+            rx="13"
+            fill="#FA7F63"
+          />
+          <text
+            x={Number(x)}
+            y={Number(y) + 4}
+            textAnchor="middle"
+            className="fill-[#022350] text-[11px] font-bold"
+          >
+            {l}
+          </text>
         </g>
       ))}
     </svg>
@@ -92,26 +157,71 @@ export function ShipRoute() {
 export function ChainFlow() {
   const nodes = ["Supplier", "Manufacturer", "Distributor", "Dealer"];
   return (
-    <svg viewBox="0 0 520 220" className="h-auto w-full" role="img" aria-label="Invoices moving through a supply chain">
+    <svg
+      viewBox="0 0 520 220"
+      className="h-auto w-full"
+      role="img"
+      aria-label="Invoices moving through a supply chain"
+    >
       {nodes.map((n, i) => {
         const x = 55 + i * 137;
         return (
           <g key={n}>
             {i < nodes.length - 1 && (
               <>
-                <line x1={x + 28} y1="100" x2={x + 109} y2="100" stroke="#0f9a8a" strokeWidth="2.4" className="flow-dash" />
+                <line
+                  x1={x + 28}
+                  y1="100"
+                  x2={x + 109}
+                  y2="100"
+                  stroke="#0f9a8a"
+                  strokeWidth="2.4"
+                  className="flow-dash"
+                />
                 <rect width="18" height="12" rx="3" fill="#FA7F63">
-                  <animateMotion dur={`${2.6 + i * 0.3}s`} repeatCount="indefinite" path={`M ${x + 28} 94 L ${x + 109} 94`} />
+                  <animateMotion
+                    dur={`${2.6 + i * 0.3}s`}
+                    repeatCount="indefinite"
+                    path={`M ${x + 28} 94 L ${x + 109} 94`}
+                  />
                 </rect>
               </>
             )}
-            <circle cx={x} cy="100" r="28" fill="#fff" stroke="#0f9a8a" strokeWidth="2.5" />
-            <text x={x} y="105" textAnchor="middle" className="fill-[#022350] text-[12px] font-bold">{i + 1}</text>
-            <text x={x} y="154" textAnchor="middle" className="fill-[#022350] text-[12px] font-semibold">{n}</text>
+            <circle
+              cx={x}
+              cy="100"
+              r="28"
+              fill="#fff"
+              stroke="#0f9a8a"
+              strokeWidth="2.5"
+            />
+            <text
+              x={x}
+              y="105"
+              textAnchor="middle"
+              className="fill-[#022350] text-[12px] font-bold"
+            >
+              {i + 1}
+            </text>
+            <text
+              x={x}
+              y="154"
+              textAnchor="middle"
+              className="fill-[#022350] text-[12px] font-semibold"
+            >
+              {n}
+            </text>
           </g>
         );
       })}
-      <text x="260" y="40" textAnchor="middle" className="fill-[#0f9a8a] text-[11px] font-bold uppercase tracking-widest">Invoices keep the chain funded</text>
+      <text
+        x="260"
+        y="40"
+        textAnchor="middle"
+        className="fill-[#0f9a8a] text-[11px] font-bold uppercase tracking-widest"
+      >
+        Invoices keep the chain funded
+      </text>
     </svg>
   );
 }
@@ -124,12 +234,19 @@ export function GrowthBars() {
     ["Strategic corporate finance", 44],
   ];
   return (
-    <div className="space-y-5" role="img" aria-label="Corporate finance solution areas">
+    <div
+      className="space-y-5"
+      role="img"
+      aria-label="Corporate finance solution areas"
+    >
       {bars.map(([l, w], i) => (
         <div key={l}>
           <p className="mb-1.5 text-sm font-semibold text-brand-ink">{l}</p>
           <div className="h-3 overflow-hidden rounded-full bg-brand-line">
-            <div className="bar-fill h-full rounded-full bg-gradient-to-r from-[#4c5fd5] to-[#FA7F63]" style={wd(w, i * 0.4)} />
+            <div
+              className="bar-fill h-full rounded-full bg-gradient-to-r from-[#4c5fd5] to-[#FA7F63]"
+              style={wd(w, i * 0.4)}
+            />
           </div>
         </div>
       ))}

@@ -16,6 +16,7 @@ import {
 import { DocMgmtHero } from "@/components/platform/heroes-trade";
 import { DocCard } from "@/components/pages/doc-card";
 import { eDocs } from "@/lib/content";
+import { docFormats } from "@/lib/doc-formats";
 import { RevealGroup, RevealItem } from "@/components/pages/reveal";
 import {
   Band,
@@ -34,7 +35,16 @@ export const metadata: Metadata = {
 export default function DocumentManagementPage() {
   return (
     <>
-      <DocMgmtHero docs={eDocs.map((d) => ({ slug: d.slug, name: d.name, label: d.label, color: d.color, bg: d.bg }))} />
+      <DocMgmtHero
+        docs={eDocs.map((d) => ({
+          slug: d.slug,
+          name: d.name,
+          label: d.label,
+          color: d.color,
+          bg: d.bg,
+          accent: docFormats.find((f) => f.slug === d.slug)?.accent,
+        }))}
+      />
 
       <Band tone="white" id="formats">
         <BandHeading

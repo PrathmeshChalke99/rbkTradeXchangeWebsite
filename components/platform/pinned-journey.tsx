@@ -22,9 +22,7 @@ import { cn } from "@/lib/utils";
 
 export type JourneyItem = {
   id: string;
-  /** short name shown in the step list */
   label: string;
-  /** the card content */
   node: ReactNode;
 };
 
@@ -46,14 +44,36 @@ function FlipCard({
   const near = 0.2 / n;
   const first = i === 0;
   const last = i === n - 1;
-  const input = [first ? -0.01 : t - wide, first ? 0 : t - near, last ? 1 : t + near, last ? 1.01 : t + wide];
+  const input = [
+    first ? -0.01 : t - wide,
+    first ? 0 : t - near,
+    last ? 1 : t + near,
+    last ? 1.01 : t + wide,
+  ];
   const opacity = useTransform(p, input, [first ? 1 : 0, 1, 1, last ? 1 : 0]);
-  const rotateX = useTransform(p, input, [first ? 0 : -35, 0, 0, last ? 0 : 30]);
+  const rotateX = useTransform(p, input, [
+    first ? 0 : -35,
+    0,
+    0,
+    last ? 0 : 30,
+  ]);
   const y = useTransform(p, input, [first ? 0 : 80, 0, 0, last ? 0 : -80]);
-  const scale = useTransform(p, input, [first ? 1 : 0.92, 1, 1, last ? 1 : 0.92]);
+  const scale = useTransform(p, input, [
+    first ? 1 : 0.92,
+    1,
+    1,
+    last ? 1 : 0.92,
+  ]);
   return (
     <motion.div
-      style={{ opacity, rotateX, y, scale, transformPerspective: 1200, pointerEvents: active ? "auto" : "none" }}
+      style={{
+        opacity,
+        rotateX,
+        y,
+        scale,
+        transformPerspective: 1200,
+        pointerEvents: active ? "auto" : "none",
+      }}
       className="absolute inset-0 flex items-center"
       aria-hidden={!active}
     >
@@ -75,7 +95,7 @@ export function PinnedJourney({
   heading: ReactNode;
   bgWord: string;
   items: JourneyItem[];
-  /** scroll distance per step, in vh */
+
   perStep?: number;
   tone?: "white" | "paper";
   label: string;
@@ -85,7 +105,10 @@ export function PinnedJourney({
   const [active, setActive] = useState(0);
   const n = items.length;
 
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const { scrollYProgress: p } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
   const wordX = useTransform(p, [0, 1], ["0%", "-18%"]);
   useMotionValueEvent(p, "change", (v) => {
     const i = Math.min(n - 1, Math.max(0, Math.floor(v * n * 0.999)));
@@ -104,7 +127,6 @@ export function PinnedJourney({
 
   return (
     <section aria-label={label} className={cn("relative", bg)}>
-      {/* pinned, desktop */}
       <div
         ref={ref}
         style={{ height: `calc(100vh + ${(n - 1) * perStep}vh)` }}
@@ -122,7 +144,9 @@ export function PinnedJourney({
           <div className="relative mx-auto grid h-full max-w-7xl grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] items-center gap-12 px-8 pt-20">
             <div>
               <span className="eyebrow">{eyebrow}</span>
-              <h2 className="mt-3 text-h2 font-semibold text-brand-ink">{heading}</h2>
+              <h2 className="mt-3 text-h2 font-semibold text-brand-ink">
+                {heading}
+              </h2>
               <div className="relative mt-9 flex gap-6">
                 <div className="relative w-1 shrink-0 rounded-full bg-brand-line">
                   <motion.span
@@ -139,18 +163,24 @@ export function PinnedJourney({
                         onClick={() => jump(k)}
                         className={cn(
                           "flex items-center gap-3 text-left transition-all duration-500",
-                          k === active ? "translate-x-1 opacity-100" : "opacity-40 hover:opacity-70",
+                          k === active
+                            ? "translate-x-1 opacity-100"
+                            : "opacity-40 hover:opacity-70",
                         )}
                       >
                         <span
                           className={cn(
                             "font-mono text-xs font-semibold transition-colors",
-                            k === active ? "text-[#C9482A]" : "text-brand-slate",
+                            k === active
+                              ? "text-[#C9482A]"
+                              : "text-brand-slate",
                           )}
                         >
                           {String(k + 1).padStart(2, "0")}
                         </span>
-                        <span className="text-[15px] font-semibold text-brand-ink">{s.label}</span>
+                        <span className="text-[15px] font-semibold text-brand-ink">
+                          {s.label}
+                        </span>
                       </button>
                     </li>
                   ))}
@@ -173,11 +203,17 @@ export function PinnedJourney({
         </div>
       </div>
 
-      {/* stacked, mobile and reduced motion */}
-      <div className={cn("mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20", !reduce && "lg:hidden")}>
+      <div
+        className={cn(
+          "mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20",
+          !reduce && "lg:hidden",
+        )}
+      >
         <Reveal>
           <span className="eyebrow">{eyebrow}</span>
-          <h2 className="mt-3 max-w-2xl text-h2 font-semibold text-brand-ink">{heading}</h2>
+          <h2 className="mt-3 max-w-2xl text-h2 font-semibold text-brand-ink">
+            {heading}
+          </h2>
         </Reveal>
         <ol className="mt-10 grid gap-5 md:grid-cols-2">
           {items.map((s, k) => (

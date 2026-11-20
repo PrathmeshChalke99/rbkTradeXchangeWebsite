@@ -34,8 +34,6 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      // This is a demo — no backend endpoint configured.
-      // Replace with your actual contact API or form handler.
       await new Promise((resolve) => setTimeout(resolve, 1500));
       setSuccess(true);
     } catch {

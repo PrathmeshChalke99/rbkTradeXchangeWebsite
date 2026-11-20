@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import fs from "node:fs";
+import path from "node:path";
+import { FileText } from "lucide-react";
+import { ReportViewer } from "@/components/platform/report-viewer";
 import { Info } from "lucide-react";
 import { AssessmentHero } from "@/components/platform/heroes-trade";
 import {
@@ -27,7 +31,10 @@ const mandatory = [
 ];
 const optional = ["Income Tax Returns", "GSTR-1", "MIS Reports", "Existing Loan Documents", "Other / Supporting"];
 
+const REPORT = "/platform/client-assement/client-assement-report.pdf";
+
 export default function ClientAssessmentPage() {
+  const hasReport = fs.existsSync(path.join(process.cwd(), "public", REPORT));
   return (
     <>
       <AssessmentHero />
@@ -72,6 +79,40 @@ export default function ClientAssessmentPage() {
             </p>
           </Reveal>
         </div>
+      </Band>
+
+      <Band tone="white" id="report">
+        <BandHeading
+          eyebrow="The report"
+          title="Read the assessment, page by page."
+          text="Scroll through a full assessment report: score, ratios, risk scorecard and next steps."
+        />
+        {hasReport ? (
+          <div className="mx-auto max-w-4xl">
+            <ReportViewer
+              src={REPORT}
+              title="Credit Feasibility Assessment"
+              subtitle="Sample report"
+              filename="credit-feasibility-assessment.pdf"
+              height={640}
+            />
+          </div>
+        ) : (
+          <div className="mx-auto flex max-w-3xl flex-col items-center rounded-3xl border border-dashed border-brand-line bg-brand-paper px-6 py-14 text-center">
+            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-accent-soft text-brand-accent-dark">
+              <FileText className="h-6 w-6" />
+            </span>
+            <p className="mt-4 font-heading text-xl font-semibold text-brand-ink">Sample report coming soon</p>
+            <p className="mt-1 max-w-md text-sm text-brand-slate">
+              A full sample assessment report will be shown here.
+            </p>
+            {process.env.NODE_ENV === "development" && (
+              <p className="mt-4 rounded-lg bg-white px-3 py-2 font-mono text-[11px] text-brand-slate">
+                Development note: add the PDF at public{REPORT}
+              </p>
+            )}
+          </div>
+        )}
       </Band>
 
       <Band tone="paper">

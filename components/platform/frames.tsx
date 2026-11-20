@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import {
   motion,
   useScroll,
@@ -11,9 +17,6 @@ import { Play, X } from "lucide-react";
 import type { Shot } from "@/lib/platform-assets";
 import { cn } from "@/lib/utils";
 
-/* ------------------------------------------------------------------ */
-/*  Browser window chrome                                              */
-/* ------------------------------------------------------------------ */
 export function BrowserFrame({
   children,
   url = "dashboard.rbktradexchange.com",
@@ -38,7 +41,9 @@ export function BrowserFrame({
       <div
         className={cn(
           "flex items-center gap-3 border-b px-4 py-2.5",
-          dark ? "border-white/10 bg-white/5" : "border-brand-line bg-brand-paper",
+          dark
+            ? "border-white/10 bg-white/5"
+            : "border-brand-line bg-brand-paper",
         )}
       >
         <span className="flex gap-1.5" aria-hidden>
@@ -61,9 +66,6 @@ export function BrowserFrame({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Plain screenshot                                                   */
-/* ------------------------------------------------------------------ */
 export function Img({
   shot,
   className,
@@ -78,7 +80,7 @@ export function Img({
     const f = b - a;
     return (
       <div className="overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {}
         <img
           src={shot.src}
           alt={shot.alt}
@@ -93,7 +95,6 @@ export function Img({
     );
   }
   return (
-    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={shot.src}
       alt={shot.alt}
@@ -106,16 +107,11 @@ export function Img({
   );
 }
 
-/** How far (as % of the image height) a tall screenshot can travel inside a window. */
 function maxPan(shot: Shot, aspect: number) {
   const w = shot.crop ? shot.w * (shot.crop[1] - shot.crop[0]) : shot.w;
   return Math.max(0, (1 - w / (aspect * shot.h)) * 100);
 }
 
-/* ------------------------------------------------------------------ */
-/*  PanShot: a fixed window onto a tall screenshot that slowly scrolls */
-/*  mode "loop": CSS loop, "scroll": driven by page scroll             */
-/* ------------------------------------------------------------------ */
 export function PanShot({
   shot,
   aspect = 4 / 3,
@@ -129,7 +125,7 @@ export function PanShot({
   aspect?: number;
   mode?: "loop" | "scroll";
   duration?: number;
-  /** 0-100: where in the screenshot the loop starts (percent of max travel). */
+
   start?: number;
   className?: string;
   priority?: boolean;
@@ -172,9 +168,6 @@ export function PanShot({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  FocusShot: window that glides to a chosen spot in the screenshot   */
-/* ------------------------------------------------------------------ */
 export function FocusShot({
   shot,
   focus,
@@ -182,7 +175,7 @@ export function FocusShot({
   className,
 }: {
   shot: Shot;
-  /** 0-100 percent of the available travel. */
+
   focus: number;
   aspect?: number;
   className?: string;
@@ -205,9 +198,6 @@ export function FocusShot({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Floating label that sits on top of a frame                         */
-/* ------------------------------------------------------------------ */
 export function FloatTag({
   children,
   className,
@@ -244,9 +234,6 @@ export function FloatTag({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Video: poster first, plays when asked, in a lightbox               */
-/* ------------------------------------------------------------------ */
 export function VideoLightbox({
   src,
   poster,

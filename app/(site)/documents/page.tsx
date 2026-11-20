@@ -1,45 +1,43 @@
 import type { Metadata } from "next";
-import { IMG, eDocs } from "@/lib/content";
-import { P } from "@/lib/photos";
-import { PageHero } from "@/components/pages/page-hero";
-import { Section, Heading } from "@/components/pages/section";
-import { CtaBanner } from "@/components/pages/cta-banner";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { eDocs } from "@/lib/content";
+import { docFormats } from "@/lib/doc-formats";
+import { DocsIndexHero } from "@/components/documents/doc-heroes";
+import { Band, BandHeading, ClosingCta } from "@/components/platform/blocks";
 import { DocCard } from "@/components/pages/doc-card";
-import { RevealGroup, RevealItem } from "@/components/pages/reveal";
-import { NumberedSteps } from "@/components/pages/numbered-steps";
+import { Reveal, RevealGroup, RevealItem } from "@/components/pages/reveal";
 
 export const metadata: Metadata = {
   title: "E-Docs Studio | RBK TradeXchange",
   description:
-    "Generate proforma invoices, contracts, purchase orders, export invoices and packing lists from templates.",
+    "Generate proforma invoices, contracts, purchase orders, export invoices and packing lists on your own formats.",
 };
+
+const steps = [
+  { k: "Choose a format", t: "Pick the document you need." },
+  { k: "Type your details", t: "Your text lands on the real format, in the right place." },
+  { k: "Check the preview", t: "See the finished page update as you type." },
+  { k: "Download or attach", t: "Save it, share it or attach it to a trade." },
+];
 
 export default function DocumentsPage() {
   return (
     <>
-      <PageHero
-        eyebrow="E-Docs Studio"
-        title={
-          <>
-            Trade paperwork that{" "}
-            <span className="gradient-text">starts ready</span>
-          </>
-        }
-        description="Six templates for the documents behind every trade, with live preview and your company and partner details filled in. Consistent paperwork also means fewer flags in AI document checks."
-        image={P.chartNotes}
-        fallback={IMG.eDocs}
-        imageAlt="Proforma invoice, purchase order and sales contract"
-        crumbs={[{ label: "Platform", href: "/platform" }, { label: "E-Docs" }]}
-        primary={{ label: "Create account", href: "/signup" }}
-        secondary={{ label: "See the module", href: "/platform/e-docs-studio" }}
-        chips={eDocs.map((d) => d.name)}
+      <DocsIndexHero
+        docs={eDocs.map((d) => ({
+          slug: d.slug,
+          name: d.name,
+          label: d.label,
+          accent: docFormats.find((f) => f.slug === d.slug)?.accent ?? d.color,
+        }))}
       />
-      <Section tone="paper">
-        <Heading
-          center={false}
-          eyebrow="Templates"
-          title="Choose a document"
-          text="Open any template to fill in a sample and watch the preview update."
+
+      <Band tone="white" id="formats">
+        <BandHeading
+          eyebrow="Formats"
+          title="Choose a document."
+          text="Open any card to fill it in and see the format live."
         />
         <RevealGroup className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {eDocs.map((d) => (
@@ -48,23 +46,35 @@ export default function DocumentsPage() {
             </RevealItem>
           ))}
         </RevealGroup>
-      </Section>
-      <Section>
-        <Heading
-          eyebrow="In the portal"
-          title="From template to finance-ready paper"
-          text="How E-Docs connects to the rest of your trade workflow."
-        />
-        <NumberedSteps
-          steps={[
-            "Choose a template",
-            "Select your company and a partner from your network",
-            "Edit fields with live preview",
-            "Download, share or attach to a trade",
-          ]}
-        />
-      </Section>
-      <CtaBanner />
+      </Band>
+
+      <Band tone="paper">
+        <BandHeading eyebrow="How it works" title="From format to finished paper." />
+        <ol className="relative grid gap-6 md:grid-cols-4">
+          <span className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent md:block" aria-hidden />
+          {steps.map((s, i) => (
+            <li key={s.k}>
+              <Reveal delay={i * 0.1}>
+                <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#022350] font-mono text-sm text-white shadow-lift">
+                  0{i + 1}
+                </span>
+                <h3 className="mt-5 font-heading text-lg font-semibold text-brand-ink">{s.k}</h3>
+                <p className="mt-1 text-sm text-brand-slate">{s.t}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-10">
+          <Link href="/trade-management/document-management" className="link-arrow">
+            Back to Document Management <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </Band>
+
+      <ClosingCta
+        title="Paperwork that starts ready."
+        text="Create your account to save formats, share them and attach them to your trades."
+      />
     </>
   );
 }

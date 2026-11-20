@@ -6,8 +6,8 @@ import { FinanceExplorer } from '@/components/pages/finance-explorer';
 import { FinanceHero } from '@/components/platform/heroes-core';
 import { Section, Heading, Disclaimer } from '@/components/pages/section';
 import { FinanceEstimator } from '@/components/pages/finance-estimator';
-import { CtaBanner } from '@/components/pages/cta-banner';
-import { NumberedSteps } from '@/components/pages/numbered-steps';
+import { ClosingCta } from '@/components/platform/blocks';
+import { MechanismFlow } from '@/components/finance/mechanism-flow';
 
 export const metadata: Metadata = { title: 'Business & Debt Finance Products | RBK TradeXchange', description: 'Pre-shipment, post-shipment, LC, working capital, term and supply-chain finance. Compare products, documents and how each one works.' };
 
@@ -54,7 +54,7 @@ export default function FinancePage() {
 
       <Section tone="paper">
         <Heading eyebrow="How applying works" title="One application, many lenders" text="You choose the product. The checklist adapts. Lenders respond on their own terms." />
-        <NumberedSteps steps={['Pick a category and product', 'Upload KYC, company and financial documents', 'Participating lenders review independently', 'Compare quotations and accept or decline']} />
+        <MechanismFlow accent="#022350" steps={['Pick a category and product', 'Upload KYC, company and financial documents', 'Participating lenders review independently', 'Compare quotations and accept or decline']} />
         <ul className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2">
           {['No obligation to accept a quote', 'Requirements adapt to each product', 'Track status in your dashboard'].map((t) => <li key={t} className="chip"><Check className="h-3.5 w-3.5 text-brand-turquoise" />{t}</li>)}
         </ul>
@@ -65,7 +65,7 @@ export default function FinancePage() {
         <FinanceEstimator />
         <Disclaimer className="mt-6" />
       </Section>
-      <CtaBanner />
+      <ClosingCta title="Every business deserves better finance." text="Create your account to apply through one adaptive flow, or talk to our team first." />
     </>
   );
 }

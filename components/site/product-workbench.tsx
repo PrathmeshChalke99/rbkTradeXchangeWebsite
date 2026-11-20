@@ -71,7 +71,6 @@ const modules = [
   },
 ];
 
-// ── Trade Management Demo ──────────────────────────────────────────
 function TradeManagementDemo() {
   const [scanning, setScanning] = useState(false);
   const [scanned, setScanned] = useState(false);
@@ -93,7 +92,6 @@ function TradeManagementDemo() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      {/* Upload & scan panel */}
       <div className="space-y-4">
         <div className="rounded-xl border border-brand-paleblue bg-white/60 p-4">
           <h4 className="font-heading text-sm font-semibold text-brand-ink mb-3">
@@ -182,7 +180,6 @@ function TradeManagementDemo() {
         </p>
       </div>
 
-      {/* Results panel */}
       <div className="relative rounded-xl border border-brand-paleblue bg-white/80 overflow-hidden min-h-[400px]">
         {scanning && (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/50 backdrop-blur-sm">
@@ -345,14 +342,12 @@ function TradeManagementDemo() {
   );
 }
 
-// ── Business Finance Demo ───────────────────────────────────────────
 function BusinessFinanceDemo() {
   const [selectedCat, setSelectedCat] = useState<string | null>(null);
   const [selectedSub, setSelectedSub] = useState<number | null>(null);
 
   return (
     <div className="grid gap-6 lg:grid-cols-3">
-      {/* Categories */}
       <div className="space-y-3">
         <h4 className="font-heading text-sm font-semibold text-brand-ink">
           Finance Categories
@@ -389,7 +384,6 @@ function BusinessFinanceDemo() {
         ))}
       </div>
 
-      {/* Subcategories */}
       <div className="space-y-3">
         <h4 className="font-heading text-sm font-semibold text-brand-ink">
           {selectedCat ? "Subcategories" : "Select a category"}
@@ -424,7 +418,6 @@ function BusinessFinanceDemo() {
         )}
       </div>
 
-      {/* Requirements */}
       <div className="space-y-3">
         <h4 className="font-heading text-sm font-semibold text-brand-ink">
           Required Documents
@@ -473,7 +466,6 @@ function BusinessFinanceDemo() {
   );
 }
 
-// ── Network Management Demo ─────────────────────────────────────────
 function NetworkDemo() {
   const [hovered, setHovered] = useState<string | null>(null);
   const nodeColors: Record<string, string> = {
@@ -651,7 +643,6 @@ function NetworkDemo() {
   );
 }
 
-// ── Trade Finance / Quotations Demo ─────────────────────────────────
 function QuotationsDemo() {
   const [decisions, setDecisions] = useState<
     Record<string, "accepted" | "rejected" | null>
@@ -659,7 +650,6 @@ function QuotationsDemo() {
 
   return (
     <div className="space-y-4">
-      {/* Application summary */}
       <div className="rounded-xl border border-brand-paleblue bg-white/80 p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -680,7 +670,7 @@ function QuotationsDemo() {
             <span className="font-mono text-sm text-brand-ink">$48,500</span>
           </div>
         </div>
-        {/* Progress */}
+
         <div className="mt-3 flex items-center gap-2">
           {["Submitted", "Assigned", "Under Review", "Quoted", "Decision"].map(
             (stage, i) => (
@@ -705,7 +695,6 @@ function QuotationsDemo() {
         </div>
       </div>
 
-      {/* Lender quotations */}
       <div className="grid gap-3 sm:grid-cols-3">
         {sampleQuotations.map((q) => {
           const decision = decisions[q.id];
@@ -803,13 +792,11 @@ function QuotationsDemo() {
   );
 }
 
-// ── E-Docs Demo ─────────────────────────────────────────────────────
 function EDocsDemo() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
     <div className="grid gap-6 lg:grid-cols-5">
-      {/* Template selection */}
       <div className="lg:col-span-2 space-y-3">
         <h4 className="font-heading text-sm font-semibold text-brand-ink">
           Document Templates
@@ -848,7 +835,6 @@ function EDocsDemo() {
         </div>
       </div>
 
-      {/* Preview */}
       <div className="lg:col-span-3">
         {selected === null ? (
           <div className="flex h-full min-h-[300px] items-center justify-center rounded-xl border border-dashed border-brand-paleblue bg-white/40">
@@ -986,7 +972,6 @@ function EDocsDemo() {
   );
 }
 
-// ── Main Workbench ──────────────────────────────────────────────────
 export function ProductWorkbench() {
   const [activeTab, setActiveTab] = useState("trade");
   const [autoAdvance, setAutoAdvance] = useState(true);

@@ -1,7 +1,6 @@
-'use client';
-import { motion } from 'framer-motion';
+"use client";
+import { motion } from "framer-motion";
 
-/** Page transition on every route change: fade and rise (disabled for reduced motion). */
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <motion.div

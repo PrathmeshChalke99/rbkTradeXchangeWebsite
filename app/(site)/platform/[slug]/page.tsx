@@ -31,7 +31,6 @@ export function generateMetadata({
     : {};
 }
 
-/** Module-specific supporting content for modules without an interactive embed. */
 function ModuleExtras({ slug }: { slug: string }) {
   if (slug === "business-finance") {
     return (

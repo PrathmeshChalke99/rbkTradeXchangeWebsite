@@ -31,14 +31,12 @@ export function Photo({
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // Reset when the src changes (e.g. carousel slide swap)
   useEffect(() => {
     setCurrent(src);
     setLoaded(false);
     setFailed(false);
   }, [src]);
 
-  // Catch images that finished loading / failed before hydration
   useEffect(() => {
     const el = imgRef.current;
     if (!el) return;
@@ -61,7 +59,6 @@ export function Photo({
         className,
       )}
     >
-      {/* Shimmer skeleton — clipped to the wrapper's radius */}
       <span
         aria-hidden
         className={cn(
@@ -73,7 +70,6 @@ export function Photo({
         )}
       />
 
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         ref={imgRef}
         src={current}

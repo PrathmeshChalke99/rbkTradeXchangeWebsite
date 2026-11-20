@@ -10,10 +10,13 @@ import { cn } from "@/lib/utils";
 
 const rot = (s: number) => ({ "--spin": `${s}s` }) as CSSProperties;
 
-/* ================================================================== */
-/*  BUSINESS NETWORK: orbit of partners + the real network screens    */
-/* ================================================================== */
-const orbiters = ["Manufacturers", "Suppliers", "Importers", "Exporters", "Partners"];
+const orbiters = [
+  "Manufacturers",
+  "Suppliers",
+  "Importers",
+  "Exporters",
+  "Partners",
+];
 const netShots = [
   { k: "Buyers", shot: shots.buyers },
   { k: "Suppliers", shot: shots.suppliers },
@@ -46,11 +49,17 @@ export function NetworkHero() {
           }
           text="Business growth depends on the right connections. Manage your trade relationships and discover new opportunities."
           primary={{ label: "Explore the network", href: "#audiences" }}
-          secondary={{ label: "Log in", href: "https://dashboard.rbktradexchange.com/auth/login" }}
+          secondary={{
+            label: "Log in",
+            href: "https://dashboard.rbktradexchange.com/auth/login",
+          }}
         />
 
         <div className="relative mx-auto w-full max-w-2xl">
-          <div className="relative mx-auto aspect-square w-[78%] max-w-[26rem]" aria-hidden>
+          <div
+            className="relative mx-auto aspect-square w-[78%] max-w-[26rem]"
+            aria-hidden
+          >
             <div className="absolute inset-0 rounded-full border border-dashed border-white/20" />
             <div className="absolute inset-[16%] rounded-full border border-dashed border-white/15" />
             <div className="spin-slow absolute inset-0" style={rot(40)}>
@@ -60,7 +69,10 @@ export function NetworkHero() {
                   <span
                     key={o}
                     className="absolute -translate-x-1/2 -translate-y-1/2"
-                    style={{ left: `${(50 + 50 * Math.cos(a)).toFixed(2)}%`, top: `${(50 + 50 * Math.sin(a)).toFixed(2)}%` }}
+                    style={{
+                      left: `${(50 + 50 * Math.cos(a)).toFixed(2)}%`,
+                      top: `${(50 + 50 * Math.sin(a)).toFixed(2)}%`,
+                    }}
                   >
                     <span className="spin-slow-rev block" style={rot(40)}>
                       <span className="block whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold backdrop-blur">
@@ -102,16 +114,16 @@ export function NetworkHero() {
   );
 }
 
-/* ================================================================== */
-/*  RBK PAY: deep teal-navy, currencies converging into one account   */
-/* ================================================================== */
 const ccy = ["$", "€", "£", "¥", "د.إ"];
 
 export function PayHero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#04213f] via-[#073b5c] to-[#0b6e8a] text-white">
       <div className="dot-grid-light absolute inset-0 opacity-30" aria-hidden />
-      <div className="aurora-blob -right-20 top-0 h-96 w-96 bg-[#FA7F63]/25" aria-hidden />
+      <div
+        className="aurora-blob -right-20 top-0 h-96 w-96 bg-[#FA7F63]/25"
+        aria-hidden
+      />
       <div
         className={cn(
           "relative mx-auto grid grid-cols-1 max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8",
@@ -133,29 +145,73 @@ export function PayHero() {
         />
 
         <div className="relative mx-auto w-full max-w-xl rounded-[2rem] border border-white/15 bg-white/5 p-6 backdrop-blur sm:p-8">
-          <svg viewBox="0 0 520 300" className="h-auto w-full" role="img" aria-label="Foreign currencies flowing into one Indian account">
+          <svg
+            viewBox="0 0 520 300"
+            className="h-auto w-full"
+            role="img"
+            aria-label="Foreign currencies flowing into one Indian account"
+          >
             {ccy.map((c, idx) => {
               const y = 40 + idx * 55;
               const d = `M 70 ${y} C 190 ${y}, 200 150, 330 150`;
               return (
                 <g key={c}>
-                  <path d={d} fill="none" stroke="#fff" strokeOpacity="0.15" strokeWidth="1.5" />
-                  <path d={d} fill="none" stroke="#FDB9A8" strokeWidth="1.8" className="flow-dash" />
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#fff"
+                    strokeOpacity="0.15"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#FDB9A8"
+                    strokeWidth="1.8"
+                    className="flow-dash"
+                  />
                   <circle r="4" fill="#FA7F63">
-                    <animateMotion dur={`${3 + idx * 0.4}s`} repeatCount="indefinite" path={d} />
+                    <animateMotion
+                      dur={`${3 + idx * 0.4}s`}
+                      repeatCount="indefinite"
+                      path={d}
+                    />
                   </circle>
-                  <circle cx="48" cy={y} r="22" fill="#fff" fillOpacity="0.1" stroke="#fff" strokeOpacity="0.4" />
-                  <text x="48" y={y + 5} textAnchor="middle" className="fill-white text-[15px] font-bold">
+                  <circle
+                    cx="48"
+                    cy={y}
+                    r="22"
+                    fill="#fff"
+                    fillOpacity="0.1"
+                    stroke="#fff"
+                    strokeOpacity="0.4"
+                  />
+                  <text
+                    x="48"
+                    y={y + 5}
+                    textAnchor="middle"
+                    className="fill-white text-[15px] font-bold"
+                  >
                     {c}
                   </text>
                 </g>
               );
             })}
             <rect x="330" y="105" width="170" height="90" rx="18" fill="#fff" />
-            <text x="415" y="140" textAnchor="middle" className="fill-[#022350] text-[11px] font-semibold uppercase tracking-widest">
-              RBK Pay
-            </text>
-            <text x="415" y="170" textAnchor="middle" className="fill-[#022350] text-[26px] font-bold">
+            <image
+              href="/rbk_pay.png"
+              x="383"
+              y="98"
+              width="64"
+              height="64"
+              preserveAspectRatio="xMidYMid meet"
+            />
+            <text
+              x="415"
+              y="186"
+              textAnchor="middle"
+              className="fill-[#022350] text-[24px] font-bold"
+            >
               ₹ India
             </text>
           </svg>
@@ -168,9 +224,6 @@ export function PayHero() {
   );
 }
 
-/* ================================================================== */
-/*  EXIM WORLD: quiet globe, advisory                                 */
-/* ================================================================== */
 export function EximHero() {
   return (
     <section className="relative overflow-hidden bg-[#fbf7f2]">
@@ -195,6 +248,14 @@ export function EximHero() {
         />
         <div className="relative mx-auto aspect-square w-full max-w-md">
           <Globe />
+          <div className="absolute left-0 top-0 rounded-2xl bg-white p-3 shadow-lift ring-1 ring-brand-line">
+            {}
+            <img
+              src="/exim_world.jpeg"
+              alt="Exim World"
+              className="h-12 w-auto"
+            />
+          </div>
         </div>
       </div>
     </section>

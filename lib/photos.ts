@@ -8,7 +8,7 @@ export const px = (id: number, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
 export const P = {
-  // sea freight & ports
+
   shipAerial: px(4700621),
   cargoFleet: px(35421778),
   shipSailing: px(15320405),
@@ -18,11 +18,11 @@ export const P = {
   portXiamen: px(17737857),
   portJakarta: px(3856440),
   portSunrise: px(14020705),
-  // warehouse & supply chain
+
   warehouseWide: px(4483610),
   warehouseWorkers: px(4483862),
   warehouseBright: px(4487363),
-  // finance desk, documents & analytics
+
   financeDesk: px(669621),
   financeDesk2: px(669614),
   chartNotes: px(5717779),
@@ -31,7 +31,7 @@ export const P = {
   analyticsTablet: px(4960323),
   tabletMan: px(9099822),
   proTablet: px(5833305),
-  // offices, banks & commercial property
+
   londonOffice: px(34092),
   suitsWindow: px(6950120),
   meetingOffice: px(6950121),

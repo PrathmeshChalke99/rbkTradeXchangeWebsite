@@ -49,7 +49,6 @@ const docFields: Record<
   ],
 };
 
-/* Stage 3 sample data — per-product finance readiness */
 const readiness = [
   {
     name: "Pre-shipment finance",
@@ -145,9 +144,7 @@ export function AIDocumentIntelligence() {
           description="Documents are uploaded, fields extracted, related documents cross-checked against trade history, and discrepancies flagged. The same scan feeds the LC check (Step 2) and your finance readiness report (Step 3)."
         />
 
-
         <div className="mt-10 grid gap-8 lg:grid-cols-2 items-center">
-          {/* Left: Document carousel */}
           <div className="relative">
             <div className="flex items-center justify-center gap-2 mb-4">
               {documentTypes.map((doc, i) => (
@@ -300,7 +297,6 @@ export function AIDocumentIntelligence() {
             </div>
           </div>
 
-          {/* Right: Analysis process & results */}
           <div className="space-y-4">
             <div className="rounded-xl border border-brand-paleblue bg-white/80 p-4">
               <h4 className="font-heading text-sm font-semibold text-brand-ink mb-3">
@@ -424,9 +420,6 @@ export function AIDocumentIntelligence() {
           </div>
         </div>
 
-        {/* ------------------------------------------------------------ */}
-        {/* Stage 3 hand-off — Finance readiness report → Lender quotes   */}
-        {/* ------------------------------------------------------------ */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -26,7 +26,7 @@ import { categories, modules } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
 import { menuDefs, type MenuDef } from "@/lib/nav-menus";
 import { LOGIN_URL, SIGNUP_URL } from "@/lib/platform-assets";
-import { GlossIcon } from "@/components/platform/gloss-icon";
+import { GlossIcon, LogoTile } from "@/components/platform/gloss-icon";
 import {
   BankIcon,
   BankNoteIcon,
@@ -46,16 +46,12 @@ import {
 import { Icon } from "@/components/pages/icon";
 import { cn } from "@/lib/utils";
 
-/* ------------------------------------------------------------------ */
-/*  Realistic icon map — one distinct icon per category               */
-/* ------------------------------------------------------------------ */
 const catIcon: Record<string, AnyIcon> = {
   "international-trade-finance": GlobeIcon,
   "domestic-supply-chain-finance": TruckIcon,
   "corporate-finance": BankIcon,
 };
 
-/* Product-level icons so rows feel real, not repetitive */
 const productIcon = (name: string): AnyIcon => {
   const n = name.toLowerCase();
   if (n.includes("invoice")) return ReceiptIcon;
@@ -70,9 +66,6 @@ const productIcon = (name: string): AnyIcon => {
   return CoinIcon;
 };
 
-/* ------------------------------------------------------------------ */
-/*  Logo                                                               */
-/* ------------------------------------------------------------------ */
 export function Logo({
   light = false,
   className,
@@ -96,9 +89,6 @@ export function Logo({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Video / Image media block (shared)                                 */
-/* ------------------------------------------------------------------ */
 function Media({
   video,
   image,
@@ -156,9 +146,6 @@ function Media({
   return null;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Marquee — seamless, fading edges, pause on hover                  */
-/* ------------------------------------------------------------------ */
 type MarqueeItem = { label: string; href: string; icon: ReactNode };
 
 function Marquee({
@@ -200,7 +187,6 @@ function Marquee({
         }
       `}</style>
 
-      {/* Scrolling track */}
       <ul
         className="nav-marquee-track flex items-center"
         style={
@@ -235,7 +221,6 @@ function Marquee({
                 hover:shadow-[0_8px_22px_rgba(37,99,235,0.10)]
 "
               >
-                {/* Icon container */}
                 <span
                   className="
                     flex h-9 w-9 shrink-0 items-center justify-center
@@ -250,10 +235,8 @@ function Marquee({
                   {item.icon}
                 </span>
 
-                {/* Label */}
                 <span className="relative whitespace-nowrap">{item.label}</span>
 
-                {/* Arrow */}
                 <ArrowUpRight
                   className="
                     ml-1 h-3.5 w-3.5 shrink-0
@@ -271,7 +254,6 @@ function Marquee({
         })}
       </ul>
 
-      {/* Left fade */}
       <div
         className="
         pointer-events-none absolute inset-y-0 left-0 z-10
@@ -280,7 +262,6 @@ function Marquee({
       "
       />
 
-      {/* Right fade */}
       <div
         className="
         pointer-events-none absolute inset-y-0 right-0 z-10
@@ -291,10 +272,6 @@ function Marquee({
     </div>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/*  Strip heading                                                      */
-/* ------------------------------------------------------------------ */
 
 function StripHeading({ children }: { children: ReactNode }) {
   return (
@@ -351,7 +328,7 @@ function MenuIntro({
               pos={imagePos}
               zoom={imageZoom}
             />
-            {/* subtle overlay so text stays readable on busy media */}
+
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             <Link
               href={cta.href}
@@ -409,7 +386,6 @@ function FinanceMenu() {
   return (
     <>
       <div className="grid gap-6 p-4 lg:grid-cols-[260px_260px_minmax(0,1fr)] xl:grid-cols-[300px_320px_minmax(0,1fr)] xl:gap-8 xl:p-8">
-        {/* ---------- COLUMN 1: FINANCE INTRO ---------- */}
         <div className="min-w-0">
           <MenuIntro
             title="A Complete Business Finance Ecosystem"
@@ -424,7 +400,6 @@ function FinanceMenu() {
           />
         </div>
 
-        {/* ---------- COLUMN 2: MAIN CATEGORIES ---------- */}
         <div className="min-w-0 border-l border-slate-200 pl-5">
           <h3 className="mb-4 text-sm font-semibold text-brand-ink">
             Finance Categories
@@ -489,7 +464,6 @@ function FinanceMenu() {
           </nav>
         </div>
 
-        {/* ---------- COLUMN 3: SUBCATEGORIES / PRODUCTS ---------- */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeSlug}
@@ -561,10 +535,6 @@ function FinanceMenu() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Card menu: used by Platform, Trade Management and Dashboard.       */
-/*  Same pattern as Finance (intro + cards + strip), different content */
-/* ------------------------------------------------------------------ */
 function CardMenu({
   def,
   withModules = false,
@@ -576,7 +546,11 @@ function CardMenu({
     ...def.cards.map((c) => ({
       label: c.label,
       href: c.href,
-      icon: <GlossIcon icon={c.icon} tint={c.tint} size="sm" />,
+      icon: c.logo ? (
+        <LogoTile src={c.logo} alt="" size="sm" />
+      ) : (
+        <GlossIcon icon={c.icon} tint={c.tint} size="sm" />
+      ),
     })),
     ...def.extra.map((c) => ({
       label: c.label,
@@ -611,7 +585,11 @@ function CardMenu({
                 href={c.href}
                 className="group relative flex h-full items-start gap-3.5 overflow-hidden rounded-xl bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue/30 hover:shadow-md"
               >
-                <GlossIcon icon={c.icon} tint={c.tint} />
+                {c.logo ? (
+                  <LogoTile src={c.logo} alt={c.label} />
+                ) : (
+                  <GlossIcon icon={c.icon} tint={c.tint} />
+                )}
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-1.5 text-sm font-semibold text-brand-ink group-hover:text-brand-blue">
                     {c.label}
@@ -634,19 +612,17 @@ function CardMenu({
     </>
   );
 }
-/* ------------------------------------------------------------------ */
+
 type MobileItem = {
   label: string;
   href: string;
   note?: string;
   icon?: AnyIcon;
+  logo?: string;
   tint?: string;
   children?: { label: string; href: string }[];
 };
 
-/* ------------------------------------------------------------------ */
-/*  Navbar                                                             */
-/* ------------------------------------------------------------------ */
 export function Navbar() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
@@ -749,6 +725,7 @@ export function Navbar() {
         href: c.href,
         note: c.text,
         icon: c.icon,
+        logo: c.logo,
         tint: c.tint,
       }));
     if (menu === "trade" || menu === "dashboard")
@@ -1018,12 +995,16 @@ export function Navbar() {
                                   href={s.href}
                                   className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-brand-paper"
                                 >
-                                  {s.icon && (
-                                    <GlossIcon
-                                      icon={s.icon}
-                                      tint={s.tint ?? "#1d5fd6"}
-                                      size="sm"
-                                    />
+                                  {s.logo ? (
+                                    <LogoTile src={s.logo} alt="" size="sm" />
+                                  ) : (
+                                    s.icon && (
+                                      <GlossIcon
+                                        icon={s.icon}
+                                        tint={s.tint ?? "#1d5fd6"}
+                                        size="sm"
+                                      />
+                                    )
                                   )}
                                   <span className="min-w-0">
                                     <span className="block text-sm font-medium text-brand-ink">

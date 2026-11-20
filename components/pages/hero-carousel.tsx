@@ -34,12 +34,12 @@ type Slide = {
   icon: typeof Building2;
   eyebrow: string;
   title: string;
-  /** number of trailing words in the title to colour with the accent */
+
   hl: number;
   subtitle: string;
   accent: string;
   light: string;
-  /** short pills, shown when a slide has no point cards */
+
   chips?: string[];
   points: { h: string; p: string }[];
   cta: { label: string; href: string };
@@ -232,7 +232,7 @@ export function HeroCarousel() {
     (n: number) => setI((n + slides.length) % slides.length),
     [],
   );
-  // Autoplay only while visible, not hovered/focused, not manually paused
+
   const running = !paused && !manualPause && !reduce && inView;
 
   useEffect(() => {
@@ -241,7 +241,6 @@ export function HeroCarousel() {
     return () => clearTimeout(t);
   }, [i, running, go]);
 
-  /* Subtle pointer parallax on the hero image */
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const px = useSpring(mx, { stiffness: 60, damping: 18 });
@@ -286,7 +285,6 @@ export function HeroCarousel() {
       aria-roledescription="carousel"
       aria-label="Platform highlights"
     >
-      {/* ============ AMBIENT BACKGROUND ============ */}
       <div className="absolute inset-0 bg-white" aria-hidden />
       <div
         aria-hidden
@@ -346,7 +344,6 @@ export function HeroCarousel() {
               aria-label={s.tab}
               aria-live={running ? "off" : "polite"}
             >
-              {/* ============ IMAGE (RIGHT SIDE) ============ */}
               <motion.div
                 className="pointer-events-none absolute inset-y-0 right-0 z-0 w-full lg:w-[58%]"
                 initial={{ opacity: 0, scale: 1.05, x: 24 }}
@@ -375,7 +372,7 @@ export function HeroCarousel() {
                         priority={i === 0}
                       />
                     </motion.div>
-                    {/* Merge into the white content area */}
+
                     <div
                       aria-hidden
                       className="absolute inset-0 bg-gradient-to-b from-white via-white/85 to-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/60 lg:to-transparent"
@@ -383,7 +380,6 @@ export function HeroCarousel() {
                   </div>
                 </motion.div>
 
-                {/* Small spinning 3D cube for depth (desktop, hidden for reduced motion) */}
                 <div
                   aria-hidden
                   className="absolute right-8 top-10 z-10 hidden [perspective:700px] motion-reduce:hidden lg:block"
@@ -395,7 +391,6 @@ export function HeroCarousel() {
                   </div>
                 </div>
 
-                {/* Floating glass badge: icon + slide name */}
                 <motion.div
                   aria-hidden
                   className="absolute bottom-6 right-4 hidden items-center gap-3 rounded-2xl border border-white/70 bg-white/70 px-4 py-3 shadow-xl shadow-slate-900/10 backdrop-blur-md lg:flex"
@@ -432,10 +427,8 @@ export function HeroCarousel() {
                 </motion.div>
               </motion.div>
 
-              {/* ============ CONTENT (LEFT SIDE) ============ */}
               <div className="relative z-10 grid grid-cols-1 items-center gap-10 py-6 lg:grid-cols-[minmax(0,44%)_1fr] lg:py-10">
                 <div>
-                  {/* Eyebrow */}
                   <motion.p
                     className="mb-4 inline-flex items-center gap-2 rounded-full border bg-white/80 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] shadow-sm backdrop-blur"
                     style={{ color: s.accent, borderColor: `${s.accent}33` }}
@@ -459,7 +452,6 @@ export function HeroCarousel() {
                     {s.eyebrow}
                   </motion.p>
 
-                  {/* Headline: word reveal, key phrase in accent colour */}
                   <h1 className="text-display font-semibold text-brand-navy">
                     {words.map((w, k) => {
                       const highlighted = k >= words.length - s.hl;
@@ -470,7 +462,9 @@ export function HeroCarousel() {
                         >
                           <motion.span
                             className="mr-[0.25em] inline-block"
-                            style={highlighted ? { color: s.accent } : undefined}
+                            style={
+                              highlighted ? { color: s.accent } : undefined
+                            }
                             variants={{
                               hidden: { y: "105%" },
                               show: { y: 0 },
@@ -503,7 +497,6 @@ export function HeroCarousel() {
                     </motion.p>
                   )}
 
-                  {/* Chips (slides without point cards) */}
                   {s.chips && s.chips.length > 0 && (
                     <ul className="mt-5 flex flex-wrap gap-2">
                       {s.chips.map((c, k) => (
@@ -527,7 +520,6 @@ export function HeroCarousel() {
                     </ul>
                   )}
 
-                  {/* Points */}
                   {s.points.length > 0 && (
                     <ul className="mt-7 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                       {s.points.map((p, k) => (
@@ -567,7 +559,6 @@ export function HeroCarousel() {
                     </ul>
                   )}
 
-                  {/* CTAs */}
                   <motion.div
                     className="mt-8 flex flex-wrap gap-3"
                     variants={{
@@ -594,14 +585,12 @@ export function HeroCarousel() {
                   </motion.div>
                 </div>
 
-                {/* Right spacer: image shows through */}
                 <div aria-hidden className="hidden lg:block" />
               </div>
             </motion.div>
           </AnimatePresence>
         </motion.div>
 
-        {/* ============ SLIDE SWITCHER ============ */}
         <div className="relative z-10 mt-4 flex items-center gap-3">
           <div
             role="tablist"
@@ -644,7 +633,7 @@ export function HeroCarousel() {
                   >
                     {sl.tab}
                   </span>
-                  {/* progress underline */}
+
                   {active && (
                     <span className="absolute inset-x-3 bottom-0 h-[3px] overflow-hidden rounded-full bg-slate-200">
                       <motion.span
@@ -665,7 +654,6 @@ export function HeroCarousel() {
             })}
           </div>
 
-          {/* Controls */}
           <div className="hidden shrink-0 items-center gap-1.5 sm:flex">
             <button
               type="button"

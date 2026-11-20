@@ -7,13 +7,13 @@ import { BrowserFrame, FocusShot } from "./frames";
 import { cn } from "@/lib/utils";
 
 export type StoryStep = {
-  /** Optional anchor id so menus can deep-link to this step. */
+  
   id?: string;
   label: string;
   title: string;
   text: string;
   shot: Shot;
-  /** 0-100: where the screenshot window rests for this step. */
+  
   focus?: number;
   aspect?: number;
   points?: string[];
@@ -136,7 +136,7 @@ export function StickyStory({
               )}
             </motion.div>
 
-            {/* mobile: inline screenshot */}
+            {}
             <div className="mt-6 lg:hidden">
               <BrowserFrame url={url} dark={dark}>
                 <FocusShot
@@ -150,7 +150,7 @@ export function StickyStory({
         ))}
       </ol>
 
-      {/* desktop: pinned screenshot */}
+      {}
       <div className="relative hidden lg:block">
         <div className="sticky top-28">
           <BrowserFrame url={url} dark={dark}>

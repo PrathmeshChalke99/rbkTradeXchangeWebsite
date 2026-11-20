@@ -9,6 +9,7 @@ import {
   SplitRow,
 } from "@/components/platform/blocks";
 import { shots } from "@/lib/platform-assets";
+import { ReportViewer } from "@/components/platform/report-viewer";
 
 export const metadata: Metadata = {
   title: "LC Discrepancy Analysis | RBK TradeXchange",
@@ -88,17 +89,12 @@ export default function LCDiscrepancyPage() {
           title="Take a written report to your team."
           text="Findings are graded by severity, with the clause referenced and a suggested correction."
           visual={
-            <div className="rounded-3xl border border-brand-line bg-brand-paper p-6 shadow-soft">
-              <p className="font-heading text-lg font-semibold text-brand-ink">LC Discrepancy Assessment Report</p>
-              <p className="mt-1 text-sm text-brand-slate">Sample report on test data</p>
-              <a
-                href="/platform/lc-discrepancies/LC_Discrepancy_Report.pdf"
-                download
-                className="btn-primary mt-5 inline-flex"
-              >
-                <Download className="h-4 w-4" /> Download sample (PDF)
-              </a>
-            </div>
+            <ReportViewer
+              src="/platform/lc-discrepancies/LC_Discrepancy_Report.pdf"
+              title="LC Discrepancy Assessment Report"
+              subtitle="Sample report on test data"
+              filename="LC_Discrepancy_Report.pdf"
+            />
           }
         />
       </Band>

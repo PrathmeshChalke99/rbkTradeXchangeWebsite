@@ -9,7 +9,7 @@ type Cta = { label: string; href: string };
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-/** Hero text block shared by every hero. Layout, colour and visuals stay per page. */
+
 export function HeroCopy({
   eyebrow,
   title,
