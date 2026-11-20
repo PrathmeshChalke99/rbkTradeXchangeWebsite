@@ -135,8 +135,11 @@ export function PinnedJourney({
         <div className="sticky top-0 h-screen overflow-hidden">
           <motion.div
             aria-hidden
-            style={{ x: wordX, WebkitTextStroke: "2px rgba(2,35,80,0.07)" }}
-            className="pointer-events-none absolute left-[4%] top-[50%] -translate-y-1/2 whitespace-nowrap font-heading text-[24vw] font-semibold leading-none text-transparent"
+            style={{
+              x: wordX,
+              WebkitTextStroke: "2px rgba(2,35,80,0.14)",
+            }}
+            className="pointer-events-none absolute left-[4%] top-[50%] -translate-y-1/2 whitespace-nowrap font-heading text-[18vw] font-semibold leading-none text-transparent"
           >
             {bgWord}
           </motion.div>
