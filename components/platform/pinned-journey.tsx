@@ -87,7 +87,7 @@ export function PinnedJourney({
   heading,
   bgWord,
   items,
-  perStep = 70,
+  perStep = 55,
   tone = "white",
   label,
 }: {
@@ -208,7 +208,7 @@ export function PinnedJourney({
 
       <div
         className={cn(
-          "mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20",
+          "mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16",
           !reduce && "lg:hidden",
         )}
       >

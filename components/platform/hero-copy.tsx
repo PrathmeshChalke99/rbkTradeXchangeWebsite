@@ -103,4 +103,4 @@ export function HeroCopy({
   );
 }
 
-export const heroPad = "pb-16 pt-28 sm:pb-24 sm:pt-36";
+export const heroPad = "pb-12 pt-28 sm:pb-16 sm:pt-32";

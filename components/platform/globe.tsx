@@ -288,7 +288,7 @@ export function Globe({
       const t = (now - start) / 1000;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
-      const R = Math.min(w, h) * 0.41;
+      const R = Math.min(w, h) * 0.38;
       const cx = w / 2;
       const cy = h * 0.54;
       // keep the hub facing the viewer, sway slowly either side
@@ -308,6 +308,37 @@ export function Globe({
         const y2 = v[1] * ct - z1 * st;
         const z2 = v[1] * st + z1 * ct;
         return [cx + x1 * R * lift, cy - y2 * R * lift, z2];
+      };
+
+      // soft atmosphere behind the sphere
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.92, cx, cy, R * 1.3);
+      halo.addColorStop(0, "rgba(68,160,220,0.30)");
+      halo.addColorStop(1, "rgba(68,160,220,0)");
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * 1.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      const pill = (text: string, x: number, y: number, bold: boolean) => {
+        ctx.font = `${bold ? 700 : 600} 11px Inter, system-ui, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        const pw = ctx.measureText(text).width + 14;
+        const ph = 18;
+        const rx = ph / 2;
+        ctx.fillStyle = "rgba(255,255,255,0.94)";
+        ctx.shadowColor = "rgba(2,35,80,0.18)";
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.moveTo(x - pw / 2 + rx, y - ph / 2);
+        ctx.arc(x + pw / 2 - rx, y, rx, -Math.PI / 2, Math.PI / 2);
+        ctx.arc(x - pw / 2 + rx, y, rx, Math.PI / 2, (3 * Math.PI) / 2);
+        ctx.closePath();
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = "#022350";
+        ctx.fillText(text, x, y + 0.5);
+        ctx.textBaseline = "alphabetic";
       };
 
       // sphere body
@@ -389,8 +420,8 @@ export function Globe({
             pen = true;
           } else pen = false;
         }
-        ctx.strokeStyle = "rgba(250,127,99,0.85)";
-        ctx.lineWidth = 1.6;
+        ctx.strokeStyle = "rgba(250,127,99,0.95)";
+        ctx.lineWidth = 2;
         ctx.stroke();
 
         // travelling dot
@@ -417,10 +448,7 @@ export function Globe({
           ctx.lineWidth = 2;
           ctx.strokeStyle = "#022350";
           ctx.stroke();
-          ctx.font = "600 11px Inter, system-ui, sans-serif";
-          ctx.fillStyle = "#022350";
-          ctx.textAlign = "center";
-          ctx.fillText(tg.name, e[0], e[1] + 18);
+          pill(tg.name, e[0], e[1] + 20, false);
         }
       });
 
@@ -437,10 +465,7 @@ export function Globe({
         ctx.arc(hp[0], hp[1], 6.5, 0, Math.PI * 2);
         ctx.fillStyle = "#FA7F63";
         ctx.fill();
-        ctx.font = "700 12px Inter, system-ui, sans-serif";
-        ctx.fillStyle = "#022350";
-        ctx.textAlign = "center";
-        ctx.fillText(hub.name, hp[0], hp[1] - 14);
+        pill(hub.name, hp[0], hp[1] - 22, true);
       }
     };
 

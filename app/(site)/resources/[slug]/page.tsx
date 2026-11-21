@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
 import { Photo } from '@/components/pages/photo';
 import { resources, getArticle } from '@/lib/content';
 import { Breadcrumbs } from '@/components/pages/breadcrumbs';
-import { Section, Heading, Disclaimer } from '@/components/pages/section';
+import { Section, Heading } from '@/components/pages/section';
 import { ResourceGrid } from '@/components/pages/resource-grid';
 import { CtaBanner } from '@/components/pages/cta-banner';
 import { Reveal } from '@/components/pages/reveal';
@@ -68,7 +68,6 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                 </div>
                 <Link href={a.related} className="btn-primary shrink-0">Explore the product<ArrowRight className="h-4 w-4" /></Link>
               </div>
-              <Disclaimer className="mt-6" />
               <Link href="/resources" className="link-arrow mt-8"><ArrowLeft className="h-4 w-4" />All guides</Link>
             </div>
           </div>

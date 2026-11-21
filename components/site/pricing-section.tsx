@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Check, ArrowRight, Info } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/site/section-heading";
 import { cn } from "@/lib/utils";
 
@@ -248,7 +248,6 @@ export function PricingSection() {
         </div>
 
         <p className="mx-auto mt-8 flex max-w-2xl items-start justify-center gap-2 text-center text-xs text-brand-slate">
-          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
           Plan names, prices and entitlements are shown for illustration. Actual
           configuration and billing are managed within the platform.
         </p>

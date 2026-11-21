@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Info } from "lucide-react";
 import { TradeAIHero } from "@/components/platform/heroes-trade";
 import { BrowserFrame, FocusShot, Img } from "@/components/platform/frames";
 import {
@@ -115,12 +114,6 @@ export default function TradeAIPage() {
         />
       </Band>
 
-      <Band tone="paper">
-        <p className="mx-auto flex max-w-3xl gap-3 rounded-xl border border-brand-line bg-white p-4 text-xs leading-relaxed text-brand-slate">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" aria-hidden />
-          TradeAI supports document analysis and decision-making. Final document acceptance and compliance remain subject to the relevant bank, issuing institution and applicable rules.
-        </p>
-      </Band>
 
       <ClosingCta
         title="Let TradeAI read the paperwork."

@@ -103,7 +103,7 @@ export function Band({
     <section
       id={id}
       className={cn(
-        "relative overflow-clip py-16 sm:py-24",
+        "relative overflow-clip py-12 sm:py-16",
         tone === "white" && "bg-white",
         tone === "paper" && "bg-brand-paper",
         tone === "night" && "hero-night text-white",
@@ -133,10 +133,7 @@ export function BandHeading({
 }) {
   return (
     <Reveal
-      className={cn(
-        "mb-10 max-w-2xl sm:mb-14",
-        center && "mx-auto text-center",
-      )}
+      className={cn("mb-8 max-w-2xl sm:mb-10", center && "mx-auto text-center")}
     >
       {eyebrow && (
         <span
@@ -176,51 +173,69 @@ export function ClosingCta({
   text,
   primary = { label: "Get started", href: SIGNUP_URL },
   secondary = { label: "Talk to our team", href: "/contact" },
+  image = "/images/hero-trade-finance.png",
   className,
 }: {
   title: React.ReactNode;
   text?: string;
   primary?: Cta;
   secondary?: Cta;
+
+  image?: string;
   className?: string;
 }) {
   return (
     <section
-      className={cn("bg-white px-4 py-14 sm:px-6 sm:py-20 lg:px-8", className)}
+      className={cn("bg-white px-4 py-10 sm:px-6 sm:py-14 lg:px-8", className)}
     >
       <Reveal variant="zoom">
-        <div className="hero-night relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-14 text-center shadow-2xl sm:px-12 sm:py-20">
+        <div className="hero-night relative mx-auto flex max-w-7xl items-center justify-center overflow-hidden rounded-[2rem] px-6 py-10 text-center shadow-2xl sm:px-10 sm:py-12">
+          <img
+            src={image}
+            alt=""
+            aria-hidden
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover opacity-80"
+          />
+
           <div
-            className="dot-grid-light absolute inset-0 opacity-40"
+            className="absolute inset-0 bg-gradient-to-b from-[#050f24]/45 via-[#050f24]/30 to-[#050f24]/55"
             aria-hidden
           />
           <div
-            className="aurora-blob -right-20 -top-24 h-80 w-80 bg-[#FA7F63]/25"
+            className="dot-grid-light absolute inset-0 opacity-20"
             aria-hidden
           />
+          <div
+            className="aurora-blob -right-20 -top-24 h-80 w-80 bg-[#FA7F63]/20"
+            aria-hidden
+          />
+
           <div className="relative mx-auto max-w-3xl">
-            <h2 className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-5xl">
+            <h2 className="font-heading text-2xl font-semibold tracking-tight text-white blur-[0.6px] sm:text-4xl">
               {title}
             </h2>
             {text && (
-              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+              <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/80 blur-[0.4px] sm:text-base">
                 {text}
               </p>
             )}
-            <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
                 href={primary.href}
-                className="btn bg-[#FA7F63] px-6 py-3 text-[0.95rem] text-[#022350] shadow-glow-coral hover:-translate-y-0.5 hover:bg-[#ff9279]"
+                className="btn bg-[#FA7F63] px-5 py-2.5 text-[0.9rem] text-[#022350] shadow-glow-coral hover:-translate-y-0.5 hover:bg-[#ff9279]"
               >
                 {primary.label}
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                href={secondary.href}
-                className="btn border border-white/25 px-6 py-3 text-[0.95rem] text-white hover:bg-white/10"
-              >
-                {secondary.label}
-              </Link>
+              {secondary && (
+                <Link
+                  href={secondary.href}
+                  className="btn border border-white/30 px-5 py-2.5 text-[0.9rem] text-white hover:bg-white/10"
+                >
+                  {secondary.label}
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -274,7 +289,7 @@ export function SplitRow({
   return (
     <div
       id={id}
-      className="grid grid-cols-1 items-center gap-10 py-8 lg:grid-cols-2 lg:gap-16 lg:py-12"
+      className="grid grid-cols-1 items-center gap-10 py-6 lg:grid-cols-2 lg:gap-16 lg:py-8"
     >
       <Reveal
         variant={reverse ? "right" : "left"}

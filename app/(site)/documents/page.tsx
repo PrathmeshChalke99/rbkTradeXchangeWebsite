@@ -11,13 +11,13 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/pages/reveal";
 export const metadata: Metadata = {
   title: "E-Docs Studio | RBK TradeXchange",
   description:
-    "Generate proforma invoices, contracts, purchase orders, export invoices and packing lists on your own formats.",
+    "Generate proforma invoices, contracts, purchase orders, export invoices and packing lists from a purchase order.",
 };
 
 const steps = [
-  { k: "Choose a format", t: "Pick the document you need." },
-  { k: "Type your details", t: "Your text lands on the real format, in the right place." },
-  { k: "Check the preview", t: "See the finished page update as you type." },
+  { k: "Choose a document", t: "Pick the one you need." },
+  { k: "Upload a purchase order", t: "Drop in the buyer's order." },
+  { k: "TradeAI builds it", t: "It reads the order and writes the document." },
   { k: "Download or attach", t: "Save it, share it or attach it to a trade." },
 ];
 
@@ -37,7 +37,7 @@ export default function DocumentsPage() {
         <BandHeading
           eyebrow="Formats"
           title="Choose a document."
-          text="Open any card to fill it in and see the format live."
+          text="Open any card to see how it is generated."
         />
         <RevealGroup className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {eDocs.map((d) => (

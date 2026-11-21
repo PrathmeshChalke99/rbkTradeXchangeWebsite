@@ -3,7 +3,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { FileText } from "lucide-react";
 import { ReportViewer } from "@/components/platform/report-viewer";
-import { Info } from "lucide-react";
 import { AssessmentHero } from "@/components/platform/heroes-trade";
 import {
   Band,
@@ -115,12 +114,6 @@ export default function ClientAssessmentPage() {
         )}
       </Band>
 
-      <Band tone="paper">
-        <p className="mx-auto flex max-w-3xl gap-3 rounded-xl border border-brand-line bg-white p-4 text-xs leading-relaxed text-brand-slate">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" aria-hidden />
-          The assessment estimates readiness. It does not approve or reject a loan. Participating lenders make their own decisions.
-        </p>
-      </Band>
 
       <ClosingCta
         title="Check your readiness first."

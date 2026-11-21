@@ -53,7 +53,7 @@ export function DocCard({ d }: { d: EDoc }) {
           {d.usedWhen}
         </p>
         <span className="link-arrow mt-4">
-          Try the template
+          See how it works
           <ArrowRight className="h-4 w-4" />
         </span>
       </div>

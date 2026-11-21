@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import fs from "node:fs";
+import path from "node:path";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Check, Lightbulb } from "lucide-react";
 import { eDocs, getDoc } from "@/lib/content";
 import { getFormat } from "@/lib/doc-formats";
 import { DocPageHero } from "@/components/documents/doc-heroes";
-import { FormatPreview } from "@/components/documents/format-preview";
+import { DocFlowDemo } from "@/components/documents/doc-flow-demo";
 import { Band, BandHeading, ClosingCta } from "@/components/platform/blocks";
 import { Spot } from "@/components/platform/spot";
 import { DocCard } from "@/components/pages/doc-card";
@@ -20,11 +22,30 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     : {};
 }
 
+/** What the visitor uploads before TradeAI generates each document. */
+const sourceFor: Record<string, string> = {
+  "proforma-invoice": "Purchase order",
+  "sales-contract": "Purchase order",
+  "purchase-contract": "Purchase order",
+  "purchase-order": "Order request",
+  "export-invoice": "Sales contract",
+  "packing-list": "Export invoice",
+};
+
+/** Watermark shown on generated documents. Drop public/watermark.png to use your own. */
+const watermark = fs.existsSync(path.join(process.cwd(), "public", "watermark.png"))
+  ? "/watermark.png"
+  : "/tradeExchange.png";
+
 export default function DocPage({ params }: { params: { slug: string } }) {
   const d = getDoc(params.slug);
   const format = getFormat(params.slug);
   if (!d || !format) notFound();
   const others = eDocs.filter((x) => x.slug !== d.slug).slice(0, 3);
+  const flowFields = format.fields
+    .filter((x) => x.kind !== "textarea" && x.key !== "no" && x.key !== "date")
+    .slice(0, 6)
+    .map((x) => ({ label: x.label, value: x.value }));
 
   return (
     <>
@@ -39,17 +60,17 @@ export default function DocPage({ params }: { params: { slug: string } }) {
 
       <Band tone="paper" id="preview">
         <BandHeading
-          eyebrow="Live format"
-          title={`Type your details. See the ${d.name.toLowerCase()}.`}
-          text="Everything you type is written onto the format in the right place."
+          eyebrow="See it work"
+          title={`From a purchase order to your ${d.name.toLowerCase()}.`}
+          text="Upload a buyer's purchase order. TradeAI reads it and builds the document for you to review."
         />
-        <FormatPreview
-          slug={d.slug}
-          name={d.name}
+        <DocFlowDemo
+          docName={d.name}
           label={d.label}
           accent={format.accent}
-          image={format.image}
-          fields={format.fields}
+          sourceLabel={sourceFor[d.slug] ?? "Purchase order"}
+          fields={flowFields}
+          watermark={watermark}
         />
       </Band>
 

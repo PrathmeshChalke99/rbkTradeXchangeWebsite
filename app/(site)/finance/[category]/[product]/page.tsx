@@ -20,7 +20,6 @@ import { Band, BandHeading, ClosingCta } from "@/components/platform/blocks";
 import { Spot } from "@/components/platform/spot";
 import { GlossIcon } from "@/components/platform/gloss-icon";
 import { DocIcon, LayersIcon } from "@/components/platform/icons";
-import { Disclaimer } from "@/components/pages/section";
 import { FaqList } from "@/components/pages/faq-list";
 import { RevealGroup, RevealItem } from "@/components/pages/reveal";
 import { OnThisPage } from "@/components/pages/on-this-page";
@@ -193,7 +192,6 @@ export default function ProductPage({
                 </RevealItem>
               ))}
             </RevealGroup>
-            <Disclaimer className="mt-6" />
           </div>
           <div id="faqs" className="scroll-mt-32">
             <BandHeading eyebrow="FAQs" title="Frequently asked questions" />

@@ -120,10 +120,12 @@ export function PayHero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#04213f] via-[#073b5c] to-[#0b6e8a] text-white">
       <div className="dot-grid-light absolute inset-0 opacity-30" aria-hidden />
+
       <div
         className="aurora-blob -right-20 top-0 h-96 w-96 bg-[#FA7F63]/25"
         aria-hidden
       />
+
       <div
         className={cn(
           "relative mx-auto grid grid-cols-1 max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8",
@@ -153,7 +155,10 @@ export function PayHero() {
           >
             {ccy.map((c, idx) => {
               const y = 40 + idx * 55;
-              const d = `M 70 ${y} C 190 ${y}, 200 150, 330 150`;
+
+              // All currency lines converge at the Rupee circle.
+              const d = `M 70 ${y} C 190 ${y}, 250 150, 360 150`;
+
               return (
                 <g key={c}>
                   <path
@@ -163,6 +168,7 @@ export function PayHero() {
                     strokeOpacity="0.15"
                     strokeWidth="1.5"
                   />
+
                   <path
                     d={d}
                     fill="none"
@@ -170,6 +176,8 @@ export function PayHero() {
                     strokeWidth="1.8"
                     className="flow-dash"
                   />
+
+                  {/* Animated currency flow */}
                   <circle r="4" fill="#FA7F63">
                     <animateMotion
                       dur={`${3 + idx * 0.4}s`}
@@ -177,6 +185,8 @@ export function PayHero() {
                       path={d}
                     />
                   </circle>
+
+                  {/* Currency labels */}
                   <circle
                     cx="48"
                     cy={y}
@@ -186,6 +196,7 @@ export function PayHero() {
                     stroke="#fff"
                     strokeOpacity="0.4"
                   />
+
                   <text
                     x="48"
                     y={y + 5}
@@ -197,24 +208,26 @@ export function PayHero() {
                 </g>
               );
             })}
-            <rect x="330" y="105" width="170" height="90" rx="18" fill="#fff" />
-            <image
-              href="/rbk_pay.png"
-              x="383"
-              y="98"
-              width="64"
-              height="64"
-              preserveAspectRatio="xMidYMid meet"
+
+            <circle
+              cx="415"
+              cy="150"
+              r="55"
+              fill="#2D657F"
+              fillOpacity="0.1"
+              stroke="#fff"
+              strokeOpacity="0.4"
             />
             <text
               x="415"
-              y="186"
+              y="168"
               textAnchor="middle"
-              className="fill-[#022350] text-[24px] font-bold"
+              className="fill-[#fff] text-[56px] font-bold"
             >
-              ₹ India
+              ₹
             </text>
           </svg>
+
           <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-widest text-white/50">
             Illustrative flow
           </p>

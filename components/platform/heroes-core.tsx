@@ -104,15 +104,16 @@ const financeTicker = [
   "Project Finance",
 ];
 
+const financeChips: [string, string][] = [
+  ["Import Finance", "left-[0%] top-[12%]"],
+  ["LC Discounting", "right-[0%] top-[24%]"],
+  ["Invoice Discounting", "left-[-2%] bottom-[26%]"],
+  ["Working Capital", "right-[2%] bottom-[12%]"],
+  ["Project Finance", "left-[24%] bottom-[0%]"],
+  ["Export Finance", "right-[22%] top-[0%]"],
+];
+
 export function FinanceHero() {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    const t = setInterval(
-      () => setI((n) => (n + 1) % financeTicker.length),
-      2400,
-    );
-    return () => clearInterval(t);
-  }, []);
   return (
     <section className="relative overflow-hidden bg-[#fff8f4]">
       <div className="dot-grid absolute inset-0 opacity-70" aria-hidden />
@@ -159,27 +160,21 @@ export function FinanceHero() {
           </div>
         </div>
 
-        <div className="relative rounded-[2rem] border border-brand-accent/20 bg-white/70 p-3 shadow-lift backdrop-blur">
-          <div className="aspect-[5/4] w-full sm:aspect-[4/3]">
-            <Globe />
-          </div>
-          <div className="mx-3 mb-2 flex items-center gap-3 rounded-2xl bg-[#022350] px-4 py-3 text-white">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#FDB9A8]">
-              Now showing
+        <div className="relative mx-auto aspect-square w-full max-w-xl">
+          <Globe />
+          {financeChips.map(([label, pos], k) => (
+            <span
+              key={label}
+              style={{ "--d": `${k * 1.3}s` } as React.CSSProperties}
+              className={cn(
+                "pop-in absolute z-10 rounded-full border border-brand-line bg-white px-3 py-1.5 text-xs font-semibold text-brand-ink shadow-lift",
+                pos,
+              )}
+            >
+              <i className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#FA7F63]" />
+              {label}
             </span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35 }}
-                className="text-sm font-semibold"
-              >
-                {financeTicker[i]}
-              </motion.span>
-            </AnimatePresence>
-          </div>
+          ))}
         </div>
       </div>
     </section>

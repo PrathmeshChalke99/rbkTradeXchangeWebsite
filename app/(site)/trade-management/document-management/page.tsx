@@ -50,7 +50,7 @@ export default function DocumentManagementPage() {
         <BandHeading
           eyebrow="Document formats"
           title="Pick a document. See the format."
-          text="Open any card for the format overview and a live preview you can fill in."
+          text="Open any card to see how TradeAI generates it from a purchase order."
         />
         <RevealGroup className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {eDocs.map((d) => (

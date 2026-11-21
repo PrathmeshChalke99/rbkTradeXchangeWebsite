@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Download, Info } from "lucide-react";
 import { LCHero } from "@/components/platform/heroes-trade";
 import { BrowserFrame, FocusShot, Img } from "@/components/platform/frames";
 import {
@@ -99,12 +98,6 @@ export default function LCDiscrepancyPage() {
         />
       </Band>
 
-      <Band tone="paper">
-        <p className="mx-auto flex max-w-3xl gap-3 rounded-xl border border-brand-line bg-white p-4 text-xs leading-relaxed text-brand-slate">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" aria-hidden />
-          AI-assisted LC checks help identify potential inconsistencies. They do not replace professional review. Final acceptance remains with the relevant bank.
-        </p>
-      </Band>
 
       <ClosingCta
         title="Present with confidence."

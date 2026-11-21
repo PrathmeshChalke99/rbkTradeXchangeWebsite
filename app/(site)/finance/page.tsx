@@ -4,7 +4,7 @@ import { ArrowUpRight, Check } from 'lucide-react';
 import { allProducts } from '@/lib/content';
 import { FinanceExplorer } from '@/components/pages/finance-explorer';
 import { FinanceHero } from '@/components/platform/heroes-core';
-import { Section, Heading, Disclaimer } from '@/components/pages/section';
+import { Section, Heading } from '@/components/pages/section';
 import { FinanceEstimator } from '@/components/pages/finance-estimator';
 import { ClosingCta } from '@/components/platform/blocks';
 import { MechanismFlow } from '@/components/finance/mechanism-flow';
@@ -63,7 +63,6 @@ export default function FinancePage() {
       <Section>
         <Heading eyebrow="Estimator" title="Estimate what an invoice could release" text="Model an advance before you apply. Real terms come from participating lenders." />
         <FinanceEstimator />
-        <Disclaimer className="mt-6" />
       </Section>
       <ClosingCta title="Every business deserves better finance." text="Create your account to apply through one adaptive flow, or talk to our team first." />
     </>

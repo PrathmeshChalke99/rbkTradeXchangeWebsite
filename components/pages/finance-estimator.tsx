@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { animate, useReducedMotion } from "framer-motion";
-import { Calculator, Info } from "lucide-react";
+import { Calculator } from "lucide-react";
 
 const fmt = (n: number, cur: string) =>
   new Intl.NumberFormat(cur === "INR" ? "en-IN" : "en-US", {
@@ -236,7 +236,6 @@ export function FinanceEstimator() {
           </dl>
         </div>
         <p className="relative mt-auto flex gap-2 pt-6 text-xs leading-relaxed text-brand-slate">
-          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
           Illustrative only. Rates, advances and charges are set by
           participating lenders, not by RBK TradeXchange.
         </p>

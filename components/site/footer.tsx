@@ -101,6 +101,11 @@ export function Footer() {
             Import · Export · Trade finance
           </p>
         </div>
+        <p className="mt-4 max-w-4xl text-[11px] leading-relaxed text-white/35">
+          RBK TradeXchange is a technology platform, not a bank, NBFC or lender. Product descriptions are general
+          information; eligibility, pricing, tenure and security are decided independently by participating
+          lenders. AI-assisted analysis supports, but does not replace, professional review.
+        </p>
       </div>
     </footer>
   );

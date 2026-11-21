@@ -8,7 +8,6 @@ import { Band, BandHeading, ClosingCta } from "@/components/platform/blocks";
 import { Spot } from "@/components/platform/spot";
 import { GlossIcon } from "@/components/platform/gloss-icon";
 import { DocIcon } from "@/components/platform/icons";
-import { Disclaimer } from "@/components/pages/section";
 import { CategoryCard } from "@/components/pages/category-card";
 import { Photo } from "@/components/pages/photo";
 import { RevealGroup, RevealItem } from "@/components/pages/reveal";
@@ -113,7 +112,6 @@ export default function CategoryPage({ params }: { params: { category: string } 
                 </RevealItem>
               ))}
             </RevealGroup>
-            <Disclaimer className="mt-6" />
           </div>
         </div>
       </Band>
